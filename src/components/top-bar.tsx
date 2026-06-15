@@ -24,8 +24,11 @@ function Clock() {
     return () => clearInterval(id);
   }, []);
   return (
-    <div className="hidden items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-3 py-1.5 text-xs font-medium text-neutral-600 sm:flex dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
-      <span className="h-2 w-2 rounded-full bg-emerald-500" />
+    <div className="hidden items-center gap-2 rounded-full border border-black/10 bg-black/3 px-3 py-1.5 text-xs font-medium text-neutral-600 sm:flex dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
+      <div className="relative flex h-2 w-2">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+      </div>
       <span className="tabular-nums">{time || "--:--:--"}</span>
     </div>
   );
