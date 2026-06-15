@@ -1,0 +1,101 @@
+// Prisma schema — PostgreSQL (Prisma Postgres).
+// All editable site content lives here so it can be managed from /admin.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Singleton site profile (name, bio, links, etc.). Always id = "singleton".
+model Profile {
+  id               String   @id @default("singleton")
+  name             String
+  title            String
+  domain           String
+  url              String
+  email            String
+  location         String
+  available        Boolean  @default(true)
+  availabilityText String
+  githubUsername   String
+  headline         String
+  summary          String
+  resumeUrl        String   @default("/resume.pdf")
+  about            String[]
+  logoImageId      String?
+  avatarImageId    String?
+  updatedAt        DateTime @updatedAt
+}
+
+model Social {
+  id    String @id @default(cuid())
+  name  String
+  href  String
+  icon  String
+  order Int    @default(0)
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  tags        String[]
+  href        String?
+  repo        String?
+  status      String?
+  featured    Boolean  @default(false)
+  imageId     String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model SkillGroup {
+  id       String   @id @default(cuid())
+  category String
+  items    String[]
+  order    Int      @default(0)
+}
+
+model Experience {
+  id           String   @id @default(cuid())
+  role         String
+  company      String
+  period       String
+  location     String
+  description  String
+  achievements String[]
+  tags         String[]
+  order        Int      @default(0)
+}
+
+model Tool {
+  id          String @id @default(cuid())
+  name        String
+  designation String
+  image       String
+  order       Int    @default(0)
+}
+
+/// Binary image data stored directly in the database.
+model Image {
+  id        String   @id @default(cuid())
+  data      Bytes
+  mimeType  String
+  filename  String?
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

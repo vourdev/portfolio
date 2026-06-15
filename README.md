@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# vour.dev — Portfolio
 
-## Getting Started
+A dark-mode, sidebar-style developer portfolio (inspired by aadi.is-a.dev) built
+with **Next.js 16 (App Router)**, **Tailwind CSS v4**, **Aceternity UI**
+components, and a **Prisma + SQLite** contact form.
 
-First, run the development server:
+## Sections
+
+- **About** — animated hero (Aceternity `Spotlight`, `TextGenerateEffect`, `AnimatedTooltip`)
+- **Projects** — Aceternity `BentoGrid`
+- **Skills** — grouped badges + `InfiniteMovingCards` marquee
+- **Experience** — Aceternity scroll `Timeline`
+- **Stats** — live GitHub profile stats + `Meteors` cards
+- **Contact** — `BackgroundBeams` + a working form that stores messages in a database
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run db:push   # creates the SQLite database (prisma/dev.db)
+npm run dev       # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing your content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Everything lives in [`src/lib/site.ts`](src/lib/site.ts)** — name, title, bio,
+socials, projects, skills, experience and your GitHub handle. No JSX required.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| What | Where |
+| --- | --- |
+| Name, title, bio, email, socials | `src/lib/site.ts` → `siteConfig`, `socials`, `aboutParagraphs` |
+| Projects / Skills / Experience | `src/lib/site.ts` → `projects`, `skillGroups`, `experiences` |
+| Avatar | replace `public/avatar.svg` |
+| Résumé | replace `public/resume.pdf` |
+| GitHub stats handle | `siteConfig.githubUsername` |
 
-## Learn More
+## Contact form & database
 
-To learn more about Next.js, take a look at the following resources:
+The form posts to a **Server Action** (`src/app/actions.ts`) which validates the
+input (plus a honeypot) and stores it via Prisma. View stored messages with:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run db:studio   # opens Prisma Studio
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Local dev uses **SQLite** so it works with zero setup. **For production on
+Vercel**, SQLite won't persist — switch to hosted Postgres:
 
-## Deploy on Vercel
+1. Add a Postgres database (Neon / Supabase via the Vercel Marketplace).
+2. In `prisma/schema.prisma` change `provider = "sqlite"` → `provider = "postgresql"`.
+3. Set `DATABASE_URL` to your Postgres connection string.
+4. Run `npx prisma db push`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## GitHub Stats
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Stats section fetches public profile data from the GitHub API (cached 1h). If
+the handle doesn't resolve it shows placeholder numbers. Set
+`siteConfig.githubUsername` to your handle to show live contribution graphs.
+
+> Real **traffic** (repo views/clones) requires an authenticated token and only
+> works for repos you own. Set `GITHUB_TOKEN` in `.env` to raise the rate limit
+> and enable token-based requests.

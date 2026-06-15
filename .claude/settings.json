@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/usr/bin/grep -E \"class-variance-authority|radix-ui|@radix\" src/components/ui/button.tsx)",
+      "Bash(npm ls *)",
+      "Bash(/usr/bin/grep -oE \"function \\(Card[A-Za-z]*\\)\" src/components/ui/card.tsx)"
+    ]
+  }
+}
