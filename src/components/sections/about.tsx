@@ -17,7 +17,7 @@ export function About({
   return (
     <section
       id="about"
-      className="relative flex min-h-[calc(100vh-6.5rem)] w-full items-center overflow-hidden px-6  md:px-12"
+      className="relative flex min-h-[calc(100vh-6.5rem)] w-full items-center overflow-hidden px-6 py-24 md:py-4 md:px-12"
     >
       <div className="hidden dark:block">
         <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="white" />
