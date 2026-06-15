@@ -202,7 +202,7 @@ export function PortfolioSidebar({
       </aside>
 
       {/* Mobile top bar */}
-      <header className="sticky top-3 z-50 flex items-center justify-between border-b border-black/10 bg-white/80 px-4 py-3 backdrop-blur-md sm:top-4 md:hidden dark:border-white/10 dark:bg-neutral-950/80">
+      <header className="sticky top-0 z-50 flex items-center justify-between border-b border-black/10 bg-white/80 px-4 py-3 backdrop-blur-md md:hidden dark:border-white/10 dark:bg-neutral-950/80">
         <Link href="/" className="flex items-center gap-2">
           <Logo src={profile.logo} fallback={profile.avatar} size={30} />
           <span className="font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">

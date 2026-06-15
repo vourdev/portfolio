@@ -38,7 +38,7 @@ export default async function ToolsPage() {
   const tools = await prisma.tool.findMany({ orderBy: { order: "asc" } });
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-white">Hero tools</h1>
+      <h1 className="text-2xl font-bold text-foreground">Hero tools</h1>
       <Card title="New tool">
         <ToolForm />
       </Card>
@@ -50,11 +50,11 @@ export default async function ToolsPage() {
               <img
                 src={tool.image}
                 alt={tool.name}
-                className="h-10 w-10 rounded-lg border border-white/10 bg-neutral-950 object-contain p-1.5"
+                className="h-10 w-10 rounded-lg border border-border bg-muted object-contain p-1.5"
               />
             </div>
             <ToolForm tool={tool} />
-            <form action={deleteTool} className="mt-3 border-t border-white/5 pt-3">
+            <form action={deleteTool} className="mt-3 border-t border-border pt-3">
               <input type="hidden" name="id" defaultValue={tool.id} />
               <DeleteButton>Delete</DeleteButton>
             </form>

@@ -51,7 +51,7 @@ export default async function SocialsPage() {
   const socials = await prisma.social.findMany({ orderBy: { order: "asc" } });
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-white">Social links</h1>
+      <h1 className="text-2xl font-bold text-foreground">Social links</h1>
       <Card title="New link">
         <SocialForm />
       </Card>
@@ -59,7 +59,7 @@ export default async function SocialsPage() {
         {socials.map((social) => (
           <Card key={social.id} title={`${social.name} (${social.icon})`}>
             <SocialForm social={social} />
-            <form action={deleteSocial} className="mt-3 border-t border-white/5 pt-3">
+            <form action={deleteSocial} className="mt-3 border-t border-border pt-3">
               <input type="hidden" name="id" defaultValue={social.id} />
               <DeleteButton>Delete</DeleteButton>
             </form>

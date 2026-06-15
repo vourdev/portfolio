@@ -3,7 +3,15 @@
     "allow": [
       "Bash(/usr/bin/grep -E \"class-variance-authority|radix-ui|@radix\" src/components/ui/button.tsx)",
       "Bash(npm ls *)",
-      "Bash(/usr/bin/grep -oE \"function \\(Card[A-Za-z]*\\)\" src/components/ui/card.tsx)"
+      "Bash(/usr/bin/grep -oE \"function \\(Card[A-Za-z]*\\)\" src/components/ui/card.tsx)",
+      "Bash(sed -i '' -e 's|gap-2 text-sm text-neutral-300|gap-2 text-sm text-foreground|g' -e 's|rounded-lg border border-white/10 object-cover|rounded-lg border border-border object-cover|g' \"src/app/admin/\\(panel\\)/projects/page.tsx\")",
+      "Bash(/usr/bin/grep -c 'white/5\\\\|white/10\\\\|text-neutral-300' \"src/app/admin/\\(panel\\)/projects/page.tsx\")",
+      "Bash(echo \"remaining: $\\(/usr/bin/grep -c 'white/5\\\\|white/10\\\\|text-neutral-300' \"src/app/admin/\\(panel\\)/projects/page.tsx\"\\)\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")",
+      "Bash(/usr/bin/pgrep -f \"next dev\")",
+      "Bash(/usr/bin/pgrep -f \"next-server\")",
+      "Bash(/usr/bin/pgrep -fl \"next\")"
     ]
   }
 }

@@ -62,7 +62,7 @@ function ProjectForm({ project }: { project?: Project }) {
           <input type="file" name="image" accept="image/*" className={inputCls} />
         </Field>
       </div>
-      <label className="flex items-center gap-2 text-sm text-neutral-300">
+      <label className="flex items-center gap-2 text-sm text-foreground">
         <input
           type="checkbox"
           name="featured"
@@ -76,7 +76,7 @@ function ProjectForm({ project }: { project?: Project }) {
         <img
           src={`/api/images/${project.imageId}`}
           alt=""
-          className="h-20 rounded-lg border border-white/10 object-cover"
+          className="h-20 rounded-lg border border-border object-cover"
         />
       )}
       <Submit>{project ? "Update" : "Add project"}</Submit>
@@ -88,7 +88,7 @@ export default async function ProjectsPage() {
   const projects = await prisma.project.findMany({ orderBy: { order: "asc" } });
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-white">Projects</h1>
+      <h1 className="text-2xl font-bold text-foreground">Projects</h1>
       <Card title="New project">
         <ProjectForm />
       </Card>
@@ -96,7 +96,7 @@ export default async function ProjectsPage() {
         {projects.map((p) => (
           <Card key={p.id} title={p.title}>
             <ProjectForm project={p} />
-            <form action={deleteProject} className="mt-3 border-t border-white/5 pt-3">
+            <form action={deleteProject} className="mt-3 border-t border-border pt-3">
               <input type="hidden" name="id" defaultValue={p.id} />
               <DeleteButton>Delete project</DeleteButton>
             </form>

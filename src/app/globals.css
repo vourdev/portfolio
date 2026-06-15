@@ -29,22 +29,22 @@
 .dark {
   --background: #050505;
   --foreground: #ededed;
-  --card: #121214;
+  --card: #1a1a1e;
   --card-foreground: #ededed;
-  --popover: #18181b;
+  --popover: #1c1c21;
   --popover-foreground: #ededed;
   --primary: #3b82f6;
   --primary-foreground: #ffffff;
-  --secondary: #27272a;
+  --secondary: #26262b;
   --secondary-foreground: #fafafa;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-  --accent: #27272a;
+  --muted: #26262b;
+  --muted-foreground: #a3a3ad;
+  --accent: #26262b;
   --accent-foreground: #fafafa;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #27272a;
-  --input: #27272a;
+  --border: #2b2b31;
+  --input: #2b2b31;
   --ring: #3b82f6;
 }
 

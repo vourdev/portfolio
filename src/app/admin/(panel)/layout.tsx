@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireAuth } from "@/lib/auth";
 import { logoutAction } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { IconExternalLink, IconLogout } from "@tabler/icons-react";
 
 export const dynamic = "force-dynamic";
@@ -23,11 +24,12 @@ export default async function PanelLayout({
 }) {
   await requireAuth();
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-20 border-b border-border bg-background/90 backdrop-blur">
+    <div className="min-h-screen bg-muted/50 text-foreground dark:bg-background">
+      <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
           <span className="font-semibold">vour.dev / admin</span>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <Button asChild variant="outline" size="sm">
               <Link href="/" target="_blank">
                 View site <IconExternalLink size={14} />

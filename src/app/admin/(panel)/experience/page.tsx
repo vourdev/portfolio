@@ -55,7 +55,7 @@ export default async function ExperiencePage() {
   const items = await prisma.experience.findMany({ orderBy: { order: "asc" } });
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-white">Experience</h1>
+      <h1 className="text-2xl font-bold text-foreground">Experience</h1>
       <Card title="New experience">
         <ExperienceForm />
       </Card>
@@ -63,7 +63,7 @@ export default async function ExperiencePage() {
         {items.map((exp) => (
           <Card key={exp.id} title={`${exp.role} · ${exp.company}`}>
             <ExperienceForm exp={exp} />
-            <form action={deleteExperience} className="mt-3 border-t border-white/5 pt-3">
+            <form action={deleteExperience} className="mt-3 border-t border-border pt-3">
               <input type="hidden" name="id" defaultValue={exp.id} />
               <DeleteButton>Delete</DeleteButton>
             </form>

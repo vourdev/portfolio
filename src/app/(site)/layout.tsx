@@ -35,21 +35,24 @@ export default async function SiteLayout({
 
   return (
     <LenisProvider>
-      {/* Fixed crosshair frame */}
-      <div aria-hidden className="pointer-events-none fixed inset-0 z-[60]">
-        <div className="absolute inset-x-0 top-0 h-3 bg-[var(--background)] sm:h-4 lg:h-6" />
-        <div className="absolute inset-x-0 bottom-0 h-3 bg-[var(--background)] sm:h-4 lg:h-6" />
-        <div className="absolute inset-y-0 left-0 w-3 bg-[var(--background)] sm:w-4 lg:w-6" />
-        <div className="absolute inset-y-0 right-0 w-3 bg-[var(--background)] sm:w-4 lg:w-6" />
-        <span className="absolute inset-x-0 top-3 border-t border-black/10 sm:top-4 lg:top-6 dark:border-white/10" />
-        <span className="absolute inset-x-0 bottom-3 border-b border-black/10 sm:bottom-4 lg:bottom-6 dark:border-white/10" />
-        <div className="absolute inset-0 px-3 sm:px-4 lg:px-6">
-          <div className="mx-auto h-full max-w-[1600px] border-x border-black/10 dark:border-white/10" />
+      {/* Fixed crosshair frame — only on tablet and up; hidden on mobile. */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-[60] hidden md:block"
+      >
+        <div className="absolute inset-x-0 top-0 h-4 bg-[var(--background)] lg:h-6" />
+        <div className="absolute inset-x-0 bottom-0 h-4 bg-[var(--background)] lg:h-6" />
+        <div className="absolute inset-y-0 left-0 w-4 bg-[var(--background)] lg:w-6" />
+        <div className="absolute inset-y-0 right-0 w-4 bg-[var(--background)] lg:w-6" />
+        <span className="absolute inset-x-0 top-4 border-t border-black/15 lg:top-6 dark:border-white/15" />
+        <span className="absolute inset-x-0 bottom-4 border-b border-black/15 lg:bottom-6 dark:border-white/15" />
+        <div className="absolute inset-0 px-4 lg:px-6">
+          <div className="mx-auto h-full max-w-[1600px] border-x border-black/15 dark:border-white/15" />
         </div>
       </div>
 
-      <div className="p-3 sm:p-4 lg:p-6">
-        <div className="mx-auto min-h-[calc(100vh-1.5rem)] max-w-[1600px] sm:min-h-[calc(100vh-2rem)] lg:min-h-[calc(100vh-3rem)]">
+      <div className="md:p-4 lg:p-6">
+        <div className="mx-auto min-h-screen max-w-[1600px] md:min-h-[calc(100vh-2rem)] lg:min-h-[calc(100vh-3rem)]">
           <TopBar profile={profile} socials={socials} />
           <div className="flex flex-col md:flex-row">
             <PortfolioSidebar profile={profile} socials={socials} />

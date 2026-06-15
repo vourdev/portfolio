@@ -38,7 +38,7 @@ export default async function SkillsPage() {
   const groups = await prisma.skillGroup.findMany({ orderBy: { order: "asc" } });
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-white">Skills</h1>
+      <h1 className="text-2xl font-bold text-foreground">Skills</h1>
       <Card title="New skill group">
         <SkillForm />
       </Card>
@@ -46,7 +46,7 @@ export default async function SkillsPage() {
         {groups.map((g) => (
           <Card key={g.id} title={g.category}>
             <SkillForm group={g} />
-            <form action={deleteSkillGroup} className="mt-3 border-t border-white/5 pt-3">
+            <form action={deleteSkillGroup} className="mt-3 border-t border-border pt-3">
               <input type="hidden" name="id" defaultValue={g.id} />
               <DeleteButton>Delete group</DeleteButton>
             </form>

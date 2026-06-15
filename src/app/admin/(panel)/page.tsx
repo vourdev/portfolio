@@ -15,7 +15,7 @@ export default async function ProfilePage({
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white">Profile</h1>
+        <h1 className="text-2xl font-bold text-foreground">Profile</h1>
         {sp.saved && (
           <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-sm text-emerald-400">
             Saved ✓
@@ -59,7 +59,7 @@ export default async function ProfilePage({
               defaultChecked={p?.available ?? true}
               className="h-4 w-4 accent-blue-600"
             />
-            <label htmlFor="available" className="text-sm text-neutral-300">
+            <label htmlFor="available" className="text-sm text-foreground">
               Available for work
             </label>
             <Input
@@ -100,7 +100,7 @@ export default async function ProfilePage({
                 <img
                   src={`/api/images/${p.logoImageId}`}
                   alt="logo"
-                  className="mt-3 h-16 w-16 rounded-lg border border-white/10 object-cover"
+                  className="mt-3 h-16 w-16 rounded-lg border border-border object-cover"
                 />
               )}
             </div>
@@ -113,7 +113,7 @@ export default async function ProfilePage({
                 <img
                   src={`/api/images/${p.avatarImageId}`}
                   alt="avatar"
-                  className="mt-3 h-16 w-16 rounded-lg border border-white/10 object-cover"
+                  className="mt-3 h-16 w-16 rounded-lg border border-border object-cover"
                 />
               )}
             </div>
