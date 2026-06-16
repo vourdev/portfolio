@@ -47,16 +47,13 @@ export function DragHandle() {
   );
 }
 
-export function SortableRow({
+function SortableRowInner({
   id,
   children,
 }: {
   id: string;
   children: ReactNode;
 }) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
   const {
     attributes,
     listeners,
@@ -65,10 +62,6 @@ export function SortableRow({
     transition,
     isDragging,
   } = useSortable({ id });
-
-  if (!mounted) {
-    return <div suppressHydrationWarning>{children}</div>;
-  }
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -93,7 +86,24 @@ export function SortableRow({
   );
 }
 
-export function SortableList({
+export function SortableRow({
+  id,
+  children,
+}: {
+  id: string;
+  children: ReactNode;
+}) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return <div suppressHydrationWarning>{children}</div>;
+  }
+
+  return <SortableRowInner id={id}>{children}</SortableRowInner>;
+}
+
+function SortableListInner({
   items,
   onReorder,
   children,
@@ -139,5 +149,28 @@ export function SortableList({
         <div className="rotate-3 scale-105 opacity-90 shadow-2xl" />
       </DragOverlay>
     </DndContext>
+  );
+}
+
+export function SortableList({
+  items,
+  onReorder,
+  children,
+}: {
+  items: { id: string }[];
+  onReorder: (ids: string[]) => Promise<void>;
+  children: ReactNode;
+}) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return <div className="space-y-3">{children}</div>;
+  }
+
+  return (
+    <SortableListInner items={items} onReorder={onReorder}>
+      {children}
+    </SortableListInner>
   );
 }
