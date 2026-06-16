@@ -16,7 +16,7 @@ import {
   IconArrowUpRight,
 } from "@tabler/icons-react";
 
-function Logo({
+export function Logo({
   src,
   fallback,
   size = 40,

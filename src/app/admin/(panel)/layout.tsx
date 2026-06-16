@@ -1,21 +1,9 @@
-import Link from "next/link";
-import { requireAuth } from "@/lib/auth";
-import { logoutAction } from "@/app/admin/actions";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { IconExternalLink, IconLogout } from "@tabler/icons-react";
+import { requireAuth } from "@/auth";
+import { prisma } from "@/lib/prisma";
+import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 export const dynamic = "force-dynamic";
-
-const nav = [
-  { href: "/admin", label: "Profile" },
-  { href: "/admin/projects", label: "Projects" },
-  { href: "/admin/skills", label: "Skills" },
-  { href: "/admin/experience", label: "Experience" },
-  { href: "/admin/socials", label: "Socials" },
-  { href: "/admin/tools", label: "Tools" },
-  { href: "/admin/messages", label: "Messages" },
-];
 
 export default async function PanelLayout({
   children,
@@ -23,34 +11,17 @@ export default async function PanelLayout({
   children: React.ReactNode;
 }) {
   await requireAuth();
+  const unread = await prisma.contactMessage.count({ where: { read: false } });
+
   return (
-    <div className="min-h-screen bg-muted/50 text-foreground dark:bg-background">
-      <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-          <span className="font-semibold">vour.dev / admin</span>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Button asChild variant="outline" size="sm">
-              <Link href="/" target="_blank">
-                View site <IconExternalLink size={14} />
-              </Link>
-            </Button>
-            <form action={logoutAction}>
-              <Button type="submit" variant="outline" size="sm">
-                Logout <IconLogout size={14} />
-              </Button>
-            </form>
-          </div>
+    <div className="flex min-h-screen flex-col bg-muted/30 text-foreground lg:flex-row dark:bg-background">
+      <AdminSidebar unread={unread} />
+      <main className="min-w-0 flex-1">
+        <div className="mx-auto max-w-5xl px-4 py-8 lg:px-8 lg:py-10">
+          {children}
         </div>
-        <nav className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-2 pb-2">
-          {nav.map((n) => (
-            <Button key={n.href} asChild variant="ghost" size="sm">
-              <Link href={n.href}>{n.label}</Link>
-            </Button>
-          ))}
-        </nav>
-      </header>
-      <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
+      </main>
+      <Toaster richColors position="bottom-right" />
     </div>
   );
 }

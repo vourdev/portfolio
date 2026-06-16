@@ -1,5 +1,6 @@
 "use client";
 import { useActionState } from "react";
+import Link from "next/link";
 import { loginAction, type LoginState } from "@/app/admin/actions";
 import {
   Card,
@@ -11,17 +12,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { IconArrowLeft } from "@tabler/icons-react";
 
 const initial: LoginState = {};
 
 export default function LoginPage() {
   const [state, action, pending] = useActionState(loginAction, initial);
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Admin</CardTitle>
-          <CardDescription>Sign in to manage your site content.</CardDescription>
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background p-4">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(59,130,246,0.18),transparent_55%)]" />
+      <Card className="relative w-full max-w-sm">
+        <CardHeader className="text-center">
+          <CardTitle className="text-xl">Welcome</CardTitle>
+          <CardDescription>Sign in to the vour.dev admin panel.</CardDescription>
         </CardHeader>
         <CardContent>
           <form action={action} className="space-y-4">
@@ -43,6 +46,12 @@ export default function LoginPage() {
               {pending ? "Signing in…" : "Sign in"}
             </Button>
           </form>
+          <Link
+            href="/"
+            className="mt-5 flex items-center justify-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <IconArrowLeft size={14} /> Back to site
+          </Link>
         </CardContent>
       </Card>
     </div>

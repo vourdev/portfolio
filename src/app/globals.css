@@ -20,8 +20,8 @@
   --accent-foreground: #18181b;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #e4e4e7;
-  --input: #e4e4e7;
+  --border: #eeeef0;
+  --input: #e3e3e6;
   --ring: #2563eb;
   --radius: 0.625rem;
 }
@@ -43,8 +43,8 @@
   --accent-foreground: #fafafa;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #2b2b31;
-  --input: #2b2b31;
+  --border: #232328;
+  --input: #2c2c32;
   --ring: #3b82f6;
 }
 
@@ -143,8 +143,16 @@
   }
 }
 
+/* Default border + outline color to the theme tokens (shadcn). Utilities that
+   set an explicit color, e.g. border-black/10, still override this. */
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: var(--ring);
+  }
+}
+
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 6rem;
 }
 

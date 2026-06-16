@@ -51,7 +51,7 @@ export default async function SiteLayout({
         </div>
       </div>
 
-      <div className="md:p-4 lg:p-6">
+      <div className="lg:p-4">
         <div className="mx-auto min-h-screen max-w-[1600px] md:min-h-[calc(100vh-2rem)] lg:min-h-[calc(100vh-3rem)]">
           <TopBar profile={profile} socials={socials} />
           <div className="flex flex-col md:flex-row">

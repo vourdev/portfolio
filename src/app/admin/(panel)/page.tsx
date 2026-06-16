@@ -1,127 +1,116 @@
+import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { updateProfile } from "@/app/admin/actions";
-import { Card, Field, Input, Textarea, Submit, inputCls } from "@/components/admin/form";
+import { PageHeader } from "@/components/admin/page-header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  IconFolders,
+  IconStack2,
+  IconBriefcase,
+  IconShare3,
+  IconSparkles,
+  IconMail,
+  IconArrowRight,
+  IconUserCircle,
+} from "@tabler/icons-react";
 
-export default async function ProfilePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ saved?: string }>;
-}) {
-  const [p, sp] = await Promise.all([
-    prisma.profile.findUnique({ where: { id: "singleton" } }),
-    searchParams,
-  ]);
+export default async function DashboardPage() {
+  const [projects, skills, experiences, socials, tools, messages, unread, recent] =
+    await Promise.all([
+      prisma.project.count(),
+      prisma.skillGroup.count(),
+      prisma.experience.count(),
+      prisma.social.count(),
+      prisma.tool.count(),
+      prisma.contactMessage.count(),
+      prisma.contactMessage.count({ where: { read: false } }),
+      prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" }, take: 5 }),
+    ]);
+
+  const stats = [
+    { label: "Projects", value: projects, href: "/admin/projects", icon: IconFolders },
+    { label: "Skill groups", value: skills, href: "/admin/skills", icon: IconStack2 },
+    { label: "Experience", value: experiences, href: "/admin/experience", icon: IconBriefcase },
+    { label: "Socials", value: socials, href: "/admin/socials", icon: IconShare3 },
+    { label: "Hero tools", value: tools, href: "/admin/tools", icon: IconSparkles },
+    { label: "Messages", value: messages, href: "/admin/messages", icon: IconMail, badge: unread },
+  ];
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-foreground">Profile</h1>
-        {sp.saved && (
-          <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-sm text-emerald-400">
-            Saved ✓
-          </span>
-        )}
+      <PageHeader
+        title="Dashboard"
+        description="Manage everything that appears on your portfolio."
+        action={
+          <Button asChild>
+            <Link href="/admin/profile">
+              <IconUserCircle size={16} /> Edit profile
+            </Link>
+          </Button>
+        }
+      />
+
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        {stats.map((stat) => {
+          const Icon = stat.icon;
+          return (
+            <Link key={stat.label} href={stat.href} className="group">
+              <Card className="h-full transition-colors group-hover:border-primary/40">
+                <CardContent className="flex items-start justify-between">
+                  <div>
+                    <p className="text-3xl font-bold tabular-nums">{stat.value}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
+                  </div>
+                  <div className="relative">
+                    <Icon className="text-muted-foreground" size={22} />
+                    {stat.badge ? (
+                      <span className="absolute -top-2 -right-2 rounded-full bg-primary px-1.5 text-xs font-semibold text-primary-foreground">
+                        {stat.badge}
+                      </span>
+                    ) : null}
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          );
+        })}
       </div>
 
-      <form action={updateProfile} className="space-y-6">
-        <Card title="Identity">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Name">
-              <Input name="name" defaultValue={p?.name ?? ""} required />
-            </Field>
-            <Field label="Title">
-              <Input name="title" defaultValue={p?.title ?? ""} required />
-            </Field>
-            <Field label="Domain">
-              <Input name="domain" defaultValue={p?.domain ?? ""} />
-            </Field>
-            <Field label="Site URL">
-              <Input name="url" defaultValue={p?.url ?? ""} />
-            </Field>
-            <Field label="Email">
-              <Input name="email" type="email" defaultValue={p?.email ?? ""} />
-            </Field>
-            <Field label="Location">
-              <Input name="location" defaultValue={p?.location ?? ""} />
-            </Field>
-            <Field label="GitHub username" hint="for the Stats page">
-              <Input name="githubUsername" defaultValue={p?.githubUsername ?? ""} />
-            </Field>
-            <Field label="Résumé URL">
-              <Input name="resumeUrl" defaultValue={p?.resumeUrl ?? "/resume.pdf"} />
-            </Field>
-          </div>
-          <div className="mt-4 flex items-center gap-3">
-            <input
-              id="available"
-              type="checkbox"
-              name="available"
-              defaultChecked={p?.available ?? true}
-              className="h-4 w-4 accent-blue-600"
-            />
-            <label htmlFor="available" className="text-sm text-foreground">
-              Available for work
-            </label>
-            <Input
-              name="availabilityText"
-              defaultValue={p?.availabilityText ?? ""}
-              placeholder="Available for new projects"
-              className="max-w-xs"
-            />
-          </div>
-        </Card>
-
-        <Card title="Intro">
-          <div className="space-y-4">
-            <Field label="Headline" hint="animated hero line">
-              <Input name="headline" defaultValue={p?.headline ?? ""} />
-            </Field>
-            <Field label="Summary" hint="used for SEO / meta description">
-              <Textarea name="summary" rows={2} defaultValue={p?.summary ?? ""} />
-            </Field>
-            <Field label="About paragraphs" hint="separate paragraphs with a blank line">
-              <Textarea
-                name="about"
-                rows={7}
-                defaultValue={(p?.about ?? []).join("\n\n")}
-              />
-            </Field>
-          </div>
-        </Card>
-
-        <Card title="Images (stored in the database)">
-          <div className="grid gap-6 sm:grid-cols-2">
-            <div>
-              <Field label="Logo" hint="leave empty to keep current">
-                <input type="file" name="logo" accept="image/*" className={inputCls} />
-              </Field>
-              {p?.logoImageId && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={`/api/images/${p.logoImageId}`}
-                  alt="logo"
-                  className="mt-3 h-16 w-16 rounded-lg border border-border object-cover"
-                />
-              )}
+      <Card className="mt-6">
+        <CardHeader className="flex-row items-center justify-between space-y-0">
+          <CardTitle className="text-base">Recent messages</CardTitle>
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/admin/messages">
+              View all <IconArrowRight size={14} />
+            </Link>
+          </Button>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {recent.length === 0 && (
+            <p className="text-sm text-muted-foreground">No messages yet.</p>
+          )}
+          {recent.map((m) => (
+            <div
+              key={m.id}
+              className="flex items-center justify-between gap-3 border-b border-border pb-3 last:border-0 last:pb-0"
+            >
+              <div className="min-w-0">
+                <p className="flex items-center gap-2 font-medium">
+                  {m.name}
+                  {!m.read && <Badge className="h-5">New</Badge>}
+                </p>
+                <p className="truncate text-sm text-muted-foreground">
+                  {m.message}
+                </p>
+              </div>
+              <span className="shrink-0 text-xs text-muted-foreground">
+                {new Date(m.createdAt).toLocaleDateString()}
+              </span>
             </div>
-            <div>
-              <Field label="Avatar (fallback)" hint="leave empty to keep current">
-                <input type="file" name="avatar" accept="image/*" className={inputCls} />
-              </Field>
-              {p?.avatarImageId && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={`/api/images/${p.avatarImageId}`}
-                  alt="avatar"
-                  className="mt-3 h-16 w-16 rounded-lg border border-border object-cover"
-                />
-              )}
-            </div>
-          </div>
-        </Card>
-
-        <Submit>Save profile</Submit>
-      </form>
+          ))}
+        </CardContent>
+      </Card>
     </div>
   );
 }
