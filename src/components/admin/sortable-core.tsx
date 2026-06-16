@@ -1,10 +1,7 @@
 "use client";
 import {
-  createContext,
   useContext,
   useCallback,
-  useEffect,
-  useState,
   type ReactNode,
 } from "react";
 import {
@@ -22,13 +19,7 @@ import {
   useSortable,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-
-type DragContextValue = {
-  listeners: Record<string, unknown>;
-  attributes: Record<string, unknown>;
-};
-
-const DragCtx = createContext<DragContextValue | null>(null);
+import { DragCtx } from "./drag-context";
 
 export function DragHandleCore() {
   const ctx = useContext(DragCtx);

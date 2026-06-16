@@ -1,18 +1,11 @@
 "use client";
 import {
-  createContext,
   useContext,
   useEffect,
   useState,
   type ReactNode,
 } from "react";
-
-type DragContextValue = {
-  listeners: Record<string, unknown>;
-  attributes: Record<string, unknown>;
-};
-
-const DragCtx = createContext<DragContextValue | null>(null);
+import { DragCtx } from "./drag-context";
 
 export function DragHandle() {
   const ctx = useContext(DragCtx);
@@ -55,27 +48,20 @@ export function SortableRow({
   id: string;
   children: ReactNode;
 }) {
-  const [mounted, setMounted] = useState(false);
-  const [Core, setCore] = useState<typeof import("./sortable-core") | null>(
-    null,
-  );
+  const [ready, setReady] = useState(false);
+  const [Core, setCore] = useState<typeof import("@/components/admin/sortable-core") | null>(null);
 
   useEffect(() => {
-    import("./sortable-core")
-      .then((mod) => {
-        setCore(mod);
-        setMounted(true);
-      })
-      .catch(() => setMounted(true));
+    import("@/components/admin/sortable-core")
+      .then((mod) => { setCore(mod); setReady(true); })
+      .catch(() => setReady(true));
   }, []);
 
-  if (!mounted || !Core) {
+  if (!ready || !Core) {
     return <div suppressHydrationWarning>{children}</div>;
   }
 
-  return (
-    <Core.SortableRowCore id={id}>{children}</Core.SortableRowCore>
-  );
+  return <Core.SortableRowCore id={id}>{children}</Core.SortableRowCore>;
 }
 
 export function SortableList({
@@ -87,21 +73,16 @@ export function SortableList({
   onReorder: (ids: string[]) => Promise<void>;
   children: ReactNode;
 }) {
-  const [mounted, setMounted] = useState(false);
-  const [Core, setCore] = useState<typeof import("./sortable-core") | null>(
-    null,
-  );
+  const [ready, setReady] = useState(false);
+  const [Core, setCore] = useState<typeof import("@/components/admin/sortable-core") | null>(null);
 
   useEffect(() => {
-    import("./sortable-core")
-      .then((mod) => {
-        setCore(mod);
-        setMounted(true);
-      })
-      .catch(() => setMounted(true));
+    import("@/components/admin/sortable-core")
+      .then((mod) => { setCore(mod); setReady(true); })
+      .catch(() => setReady(true));
   }, []);
 
-  if (!mounted || !Core) {
+  if (!ready || !Core) {
     return <div className="space-y-3">{children}</div>;
   }
 
