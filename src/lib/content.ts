@@ -1,9 +1,31 @@
 import "server-only";
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
 const FALLBACK_LOGO = "/vourdev-logo.jpeg";
 const FALLBACK_AVATAR = "/avatar.svg";
+
+/**
+ * Persistent cache for content read from the database.
+ *
+ * `unstable_cache` caches across requests (unlike React's `cache`, which only
+ * dedupes within a single render). Everything is tagged with `CONTENT_TAG` so a
+ * single `revalidateTag(CONTENT_TAG)` in an admin mutation refreshes the whole
+ * site; each entity also gets its own tag for granular invalidation. We still
+ * wrap in React `cache` to dedupe lookups within one render pass.
+ *
+ * `revalidate` is a slow safety net — admin edits invalidate immediately via
+ * tags, so the time-based refresh only matters if a tag is ever missed.
+ */
+export const CONTENT_TAG = "content";
+const ONE_HOUR = 3600;
+
+function cached<T>(fn: () => Promise<T>, key: string, tags: string[]) {
+  return cache(
+    unstable_cache(fn, [key], { tags: [CONTENT_TAG, ...tags], revalidate: ONE_HOUR }),
+  );
+}
 
 export const imageUrl = (id?: string | null) =>
   id ? `/api/images/${id}` : null;
@@ -26,7 +48,7 @@ export type SiteProfile = {
   avatar: string;
 };
 
-export const getProfile = cache(async (): Promise<SiteProfile> => {
+export const getProfile = cached(async (): Promise<SiteProfile> => {
   const p = await prisma.profile.findUnique({ where: { id: "singleton" } });
   if (!p) {
     return {
@@ -64,12 +86,14 @@ export const getProfile = cache(async (): Promise<SiteProfile> => {
     logo: imageUrl(p.logoImageId) ?? FALLBACK_LOGO,
     avatar: imageUrl(p.avatarImageId) ?? FALLBACK_AVATAR,
   };
-});
+}, "profile", ["profile"]);
 
 export type SocialView = { id: string; name: string; href: string; icon: string };
-export const getSocials = cache(
+export const getSocials = cached(
   async (): Promise<SocialView[]> =>
     prisma.social.findMany({ orderBy: { order: "asc" } }),
+  "socials",
+  ["socials"],
 );
 
 export type ToolView = {
@@ -78,21 +102,27 @@ export type ToolView = {
   designation: string;
   image: string;
 };
-export const getTools = cache(
+export const getTools = cached(
   async (): Promise<ToolView[]> =>
     prisma.tool.findMany({ orderBy: { order: "asc" } }),
+  "tools",
+  ["tools"],
 );
 
-export const getSkillGroups = cache(() =>
-  prisma.skillGroup.findMany({ orderBy: { order: "asc" } }),
+export const getSkillGroups = cached(
+  () => prisma.skillGroup.findMany({ orderBy: { order: "asc" } }),
+  "skills",
+  ["skills"],
 );
 
 export const getSkillMarquee = cache(async () =>
   (await getSkillGroups()).flatMap((g) => g.items),
 );
 
-export const getExperiences = cache(() =>
-  prisma.experience.findMany({ orderBy: { order: "asc" } }),
+export const getExperiences = cached(
+  () => prisma.experience.findMany({ orderBy: { order: "asc" } }),
+  "experiences",
+  ["experiences"],
 );
 
 export type ProjectView = {
@@ -106,7 +136,7 @@ export type ProjectView = {
   featured: boolean;
   image: string | null;
 };
-export const getProjects = cache(async (): Promise<ProjectView[]> => {
+export const getProjects = cached(async (): Promise<ProjectView[]> => {
   const rows = await prisma.project.findMany({ orderBy: { order: "asc" } });
   return rows.map((r) => ({
     id: r.id,
@@ -119,4 +149,4 @@ export const getProjects = cache(async (): Promise<ProjectView[]> => {
     featured: r.featured,
     image: imageUrl(r.imageId),
   }));
-});
+}, "projects", ["projects"]);

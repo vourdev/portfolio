@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useLenis } from "lenis/react";
 import { navItems } from "@/lib/site";
@@ -169,24 +169,35 @@ export function PortfolioSidebar({
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "group flex items-center gap-3 rounded-lg border border-transparent px-3 py-2 text-sm transition-colors",
+                  "group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors",
                   active
-                    ? "border-black/10 bg-black/5 text-neutral-900 dark:border-white/10 dark:bg-white/5 dark:text-neutral-50"
+                    ? "text-neutral-900 dark:text-neutral-50"
                     : "text-neutral-500 hover:bg-black/5 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-white/5 dark:hover:text-neutral-200",
                 )}
               >
+                {active && (
+                  <motion.span
+                    layoutId="sidebar-active"
+                    className="absolute inset-0 rounded-lg border border-black/10 bg-black/5 dark:border-white/10 dark:bg-white/5"
+                    transition={{ type: "spring", stiffness: 400, damping: 34 }}
+                  />
+                )}
                 <Icon
                   size={18}
                   className={cn(
-                    "shrink-0 transition-colors",
+                    "relative z-10 shrink-0 transition-colors",
                     active
                       ? "text-blue-500 dark:text-blue-400"
                       : "text-neutral-400 group-hover:text-neutral-600 dark:text-neutral-500 dark:group-hover:text-neutral-300",
                   )}
                 />
-                <span>{item.name}</span>
+                <span className="relative z-10">{item.name}</span>
                 {active && (
-                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue-500 dark:bg-blue-400" />
+                  <motion.span
+                    layoutId="sidebar-active-dot"
+                    className="relative z-10 ml-auto h-1.5 w-1.5 rounded-full bg-blue-500 dark:bg-blue-400"
+                    transition={{ type: "spring", stiffness: 400, damping: 34 }}
+                  />
                 )}
               </Link>
             );

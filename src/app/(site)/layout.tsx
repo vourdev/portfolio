@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
+import { ViewTransition } from "react";
 import { LenisProvider } from "@/components/lenis-provider";
 import { PortfolioSidebar } from "@/components/portfolio-sidebar";
 import { TopBar } from "@/components/top-bar";
 import { getProfile, getSocials } from "@/lib/content";
-
-export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const profile = await getProfile();
@@ -56,7 +55,9 @@ export default async function SiteLayout({
           <TopBar profile={profile} socials={socials} />
           <div className="flex flex-col md:flex-row">
             <PortfolioSidebar profile={profile} socials={socials} />
-            <main className="min-w-0 flex-1">{children}</main>
+            <main className="min-w-0 flex-1">
+              <ViewTransition default="vt-page">{children}</ViewTransition>
+            </main>
           </div>
         </div>
       </div>

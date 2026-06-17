@@ -3,8 +3,9 @@
 import { prisma } from "@/lib/prisma";
 import { requireAuth, signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { CONTENT_TAG } from "@/lib/content";
 
 export type ActionResult = { ok: boolean; error?: string };
 
@@ -32,6 +33,10 @@ async function saveImage(file: FormDataEntryValue | null): Promise<string | null
 }
 
 function revalidate() {
+  // Expire the persistent data cache (unstable_cache) immediately so the public
+  // site reflects edits on the next request (read-your-own-writes), then refresh
+  // the rendered route cache. `{ expire: 0 }` is the non-deprecated immediate form.
+  revalidateTag(CONTENT_TAG, { expire: 0 });
   revalidatePath("/", "layout");
 }
 
