@@ -106,7 +106,9 @@ export async function Projects() {
                 <h3
                   className={cn(
                     "flex items-start gap-1 text-xl font-bold",
-                    img ? "text-white" : "text-neutral-900 dark:text-neutral-100",
+                    img
+                      ? "text-white"
+                      : "text-neutral-900 dark:text-neutral-100",
                   )}
                 >
                   <span className="line-clamp-2">{p.title}</span>
@@ -122,9 +124,10 @@ export async function Projects() {
                 </h3>
                 <p
                   className={cn(
-                    "mt-2 text-sm leading-relaxed",
-                    p.featured ? "line-clamp-2" : "line-clamp-3",
-                    img ? "text-neutral-200" : "text-neutral-600 dark:text-neutral-400",
+                    "mt-2 text-sm leading-relaxed line-clamp-2",
+                    img
+                      ? "text-neutral-200"
+                      : "text-neutral-600 dark:text-neutral-400",
                   )}
                 >
                   {p.description}
@@ -149,7 +152,9 @@ export async function Projects() {
                   <span
                     className={cn(
                       "rounded-md px-2 py-1 text-xs font-medium",
-                      img ? "text-white/70" : "text-neutral-400 dark:text-neutral-500",
+                      img
+                        ? "text-white/70"
+                        : "text-neutral-400 dark:text-neutral-500",
                     )}
                   >
                     +{extraTags}
