@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
+  async rewrites() {
+    // Serve the standalone report (public/task.html) at a clean /task URL.
+    return [{ source: "/task", destination: "/task.html" }];
+  },
 };
 
 export default nextConfig;
