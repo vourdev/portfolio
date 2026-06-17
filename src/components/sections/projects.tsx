@@ -27,6 +27,9 @@ export async function Projects() {
       <div className="mt-12 grid grid-flow-dense grid-cols-1 gap-4 md:auto-rows-[15.5rem] md:grid-cols-2 lg:grid-cols-4">
         {projects.map((p) => {
           const img = p.image;
+          const MAX_TAGS = p.featured ? 6 : 3;
+          const shownTags = p.tags.slice(0, MAX_TAGS);
+          const extraTags = p.tags.length - shownTags.length;
           return (
             <div
               key={p.id}
@@ -50,7 +53,7 @@ export async function Projects() {
                 </>
               )}
 
-              <div className="relative z-10">
+              <div className="relative z-10 min-h-0">
                 <div className="mb-4 flex items-center justify-between gap-3">
                   {p.status && (
                     <span
@@ -102,15 +105,15 @@ export async function Projects() {
 
                 <h3
                   className={cn(
-                    "flex items-center gap-1 text-xl font-bold",
+                    "flex items-start gap-1 text-xl font-bold",
                     img ? "text-white" : "text-neutral-900 dark:text-neutral-100",
                   )}
                 >
-                  {p.title}
+                  <span className="line-clamp-2">{p.title}</span>
                   <IconArrowUpRight
                     size={18}
                     className={cn(
-                      "transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
+                      "mt-1 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
                       img
                         ? "text-white/70 group-hover:text-white"
                         : "text-neutral-400 group-hover:text-blue-500 dark:text-neutral-600 dark:group-hover:text-blue-400",
@@ -120,6 +123,7 @@ export async function Projects() {
                 <p
                   className={cn(
                     "mt-2 text-sm leading-relaxed",
+                    p.featured ? "line-clamp-2" : "line-clamp-3",
                     img ? "text-neutral-200" : "text-neutral-600 dark:text-neutral-400",
                   )}
                 >
@@ -127,8 +131,8 @@ export async function Projects() {
                 </p>
               </div>
 
-              <div className="relative z-10 mt-6 flex flex-wrap gap-2">
-                {p.tags.map((tag) => (
+              <div className="relative z-10 mt-6 flex flex-wrap items-center gap-2">
+                {shownTags.map((tag) => (
                   <span
                     key={tag}
                     className={cn(
@@ -141,6 +145,16 @@ export async function Projects() {
                     {tag}
                   </span>
                 ))}
+                {extraTags > 0 && (
+                  <span
+                    className={cn(
+                      "rounded-md px-2 py-1 text-xs font-medium",
+                      img ? "text-white/70" : "text-neutral-400 dark:text-neutral-500",
+                    )}
+                  >
+                    +{extraTags}
+                  </span>
+                )}
               </div>
             </div>
           );
