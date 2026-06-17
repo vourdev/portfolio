@@ -2,23 +2,23 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Portfolio Implementasi Pengembangan Aplikasi Web — Menulis Kode Dengan Prinsip Sesuai Guidelines dan Best Practice</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Implementasi Pengembangan Aplikasi Web — Order Store</title>
 <style>
   @page {
     size: A4;
     margin: 2.5cm 2.5cm 2.5cm 3cm;
   }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
     font-family: "Times New Roman", Times, serif;
     font-size: 12pt;
     line-height: 1.6;
     color: #111;
-    margin: 0;
+    margin: 0 auto;
     padding: 2.5cm 3cm;
     max-width: 21cm;
-    margin-left: auto;
-    margin-right: auto;
     background: #fff;
     text-align: justify;
   }
@@ -53,14 +53,8 @@
     margin-bottom: 8px;
     color: #1d3557;
   }
-  p {
-    margin: 0 0 12px 0;
-    text-indent: 0;
-  }
-  ul, ol {
-    margin: 0 0 14px 0;
-    padding-left: 28px;
-  }
+  p { margin: 0 0 12px 0; text-indent: 0; }
+  ul, ol { margin: 0 0 14px 0; padding-left: 28px; }
   li { margin-bottom: 6px; }
   code, pre {
     font-family: "Consolas", "Courier New", monospace;
@@ -75,7 +69,7 @@
     white-space: pre-wrap;
     word-break: break-word;
     line-height: 1.4;
-    margin: 10px 0 18px 0;
+    margin: 10px 0 6px 0;
     text-align: left;
   }
   code.inline {
@@ -83,7 +77,18 @@
     padding: 2px 6px;
     border-radius: 3px;
     border: 1px solid #e2e6ef;
+    word-break: break-word;
   }
+  .code-explain {
+    background: #eef4ff;
+    border-left: 3px solid #3b6cb7;
+    padding: 8px 12px;
+    margin: 0 0 18px 0;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: #1f2d3d;
+  }
+  .code-explain strong { color: #0b1f3a; }
   .cover {
     page-break-after: always;
     text-align: center;
@@ -104,31 +109,10 @@
     line-height: 1.5;
     font-weight: bold;
   }
-  .badge {
-    display: inline-block;
-    background: #1d3557;
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 10pt;
-    margin-right: 6px;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 10px 0 20px 0;
-    font-size: 11pt;
-  }
-  th, td {
-    border: 1px solid #88909d;
-    padding: 8px 10px;
-    text-align: left;
-    vertical-align: top;
-  }
-  th {
-    background: #0b1f3a;
-    color: #fff;
-  }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0 20px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 11pt; min-width: 480px; }
+  th, td { border: 1px solid #88909d; padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #0b1f3a; color: #fff; }
   tr:nth-child(even) td { background: #f4f6fa; }
   .toc ol { list-style: none; padding-left: 0; }
   .toc ol li { margin-bottom: 4px; }
@@ -149,23 +133,101 @@
     font-size: 11pt;
   }
   .page-break { page-break-before: always; }
-  blockquote {
-    border-left: 4px solid #94a3b8;
-    margin: 12px 0;
-    padding: 6px 14px;
-    color: #334155;
-    background: #f8fafc;
-    font-style: italic;
-  }
-  .file-ref {
-    font-family: "Consolas", "Courier New", monospace;
+  .unit-tag {
+    display: inline-block;
+    background: #1d3557;
+    color: #fff;
     font-size: 10pt;
-    color: #475569;
-    display: block;
-    margin-bottom: 6px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
   }
+
+  /* ============== RESPONSIVE: TABLET ============== */
+  @media (max-width: 900px) {
+    body {
+      padding: 24px 20px;
+      font-size: 11.5pt;
+      max-width: 100%;
+      hyphens: auto;
+    }
+    h1.cover-title { font-size: 16pt; }
+    h2 { font-size: 13pt; }
+    h3 { font-size: 12.5pt; }
+    h4 { font-size: 12pt; }
+    .cover { padding-top: 40px; min-height: auto; }
+  }
+
+  /* ============== RESPONSIVE: MOBILE ============== */
+  @media (max-width: 600px) {
+    body {
+      padding: 16px 14px;
+      font-size: 14px;
+      line-height: 1.55;
+      text-align: left;
+    }
+    h1.cover-title {
+      font-size: 18px !important;
+      line-height: 1.3;
+    }
+    h1.cover-title[style*="14pt"] { font-size: 14px !important; }
+    h2 {
+      font-size: 17px;
+      margin-top: 24px;
+      padding-bottom: 4px;
+    }
+    h3 { font-size: 15.5px; margin-top: 18px; }
+    h4 { font-size: 14px; margin-top: 14px; }
+    ul, ol { padding-left: 22px; }
+    p { margin-bottom: 10px; }
+    code, pre { font-size: 11.5px; }
+    pre {
+      padding: 10px 11px;
+      line-height: 1.45;
+      border-radius: 4px;
+      overflow-x: auto;
+      white-space: pre;
+      word-break: normal;
+    }
+    code.inline { font-size: 12px; padding: 1px 5px; }
+    .code-explain {
+      font-size: 12.5px;
+      padding: 8px 10px;
+      border-radius: 4px;
+    }
+    .principle-card { padding: 10px 12px; border-radius: 4px; }
+    .note { padding: 9px 11px; font-size: 12.5px; border-radius: 4px; }
+    .cover {
+      padding-top: 28px;
+      min-height: auto;
+      page-break-after: auto;
+    }
+    .cover .author-block { margin: 24px 0; font-size: 14px; }
+    .cover .footer-meta { font-size: 13px; }
+    table { font-size: 12.5px; min-width: 420px; }
+    th, td { padding: 6px 8px; }
+    .unit-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 7px;
+      margin-bottom: 2px;
+    }
+    .page-break { page-break-before: auto; }
+  }
+
+  /* ============== PRINT ============== */
   @media print {
-    body { padding: 0; }
+    body { padding: 0; font-size: 12pt; text-align: justify; }
+    h1.cover-title { font-size: 18pt; }
+    h2 { font-size: 14pt; }
+    h3 { font-size: 13pt; }
+    h4 { font-size: 12pt; }
+    pre { font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; }
+    .code-explain { font-size: 10.5pt; }
+    .page-break { page-break-before: always; }
+    .cover { page-break-after: always; min-height: 90vh; }
+    .table-wrap { overflow: visible; }
   }
 </style>
 </head>
@@ -175,8 +237,11 @@
 <section class="cover">
   <div class="meta-top">
     <h1 class="cover-title">PORTFOLIO IMPLEMENTASI<br>PENGEMBANGAN APLIKASI WEB</h1>
-    <h1 class="cover-title" style="font-size:16pt; font-style:italic;">
-      &ldquo;Menulis Kode Dengan Prinsip Sesuai Guidelines<br>dan Best Practice&rdquo;
+    <h1 class="cover-title" style="font-size:14pt; font-style:italic; margin-top:14pt;">
+      Penerapan 8 Unit Kompetensi Pemrograman:<br>
+      Guidelines &amp; Best Practice, Debugging, Dokumentasi Kode,<br>
+      Spesifikasi Program, OOP, Library Pre-Existing,<br>
+      Akses Basis Data, dan Pengujian Unit Program
     </h1>
     <p style="margin-top:18pt;">Studi Kasus: <strong>E-Commerce Toko Baju Berbasis Website</strong><br>(Project <em>Order Store</em>)</p>
   </div>
@@ -198,10 +263,10 @@
 <!-- ========== KATA PENGANTAR ========== -->
 <section class="page-break">
   <h2>KATA PENGANTAR</h2>
-  <p>Puji syukur kami panjatkan ke hadirat Tuhan Yang Maha Esa karena atas berkat dan rahmat-Nya, portfolio implementasi pengembangan aplikasi web dengan judul <em>&ldquo;Menulis Kode Dengan Prinsip Sesuai Guidelines dan Best Practice&rdquo;</em> ini dapat diselesaikan dengan baik.</p>
-  <p>Portfolio ini disusun sebagai dokumentasi atas penerapan kaidah penulisan kode, pola arsitektur perangkat lunak, serta standar industri yang digunakan dalam proyek <strong>Sistem Informasi E-Commerce Toko Baju Berbasis Website</strong> (Order Store). Penyusunan portfolio ini bertujuan untuk menunjukkan bahwa pengembangan aplikasi bukan hanya tentang membuat fitur agar berfungsi, melainkan juga tentang menulis kode yang bersih, terstruktur, mudah dirawat, dan aman.</p>
-  <p>Kami menyadari bahwa dalam pengembangan aplikasi e-commerce skala produksi, kualitas kode merupakan fondasi penentu keberlangsungan sistem. Oleh karena itu, dalam dokumen ini kami memaparkan prinsip-prinsip yang kami pegang selama proses <em>coding</em>, mulai dari konvensi penamaan, separation of concerns, validasi input, keamanan, hingga otomatisasi <em>tooling</em>.</p>
-  <p>Kami mengucapkan terima kasih kepada dosen pengampu mata kuliah Web Programming serta seluruh rekan kelompok yang telah berkontribusi dalam penyelesaian proyek ini. Kritik dan saran yang membangun sangat kami harapkan demi penyempurnaan dokumen ini.</p>
+  <p>Puji syukur penulis panjatkan ke hadirat Tuhan Yang Maha Esa karena atas berkat dan rahmat-Nya, portfolio implementasi pengembangan aplikasi web ini dapat diselesaikan dengan baik.</p>
+  <p>Portfolio ini disusun sebagai dokumentasi atas penerapan delapan unit kompetensi pemrograman pada proyek <strong>Sistem Informasi E-Commerce Toko Baju Berbasis Website</strong> (Order Store). Kedelapan unit tersebut meliputi: (1) menulis kode dengan prinsip sesuai <em>guidelines</em> dan <em>best practice</em>, (2) melakukan <em>debugging</em>, (3) membuat dokumen kode program, (4) menggunakan spesifikasi program, (5) mengimplementasikan pemrograman berorientasi objek, (6) menggunakan <em>library</em> atau komponen <em>pre-existing</em>, (7) menerapkan akses basis data, serta (8) melaksanakan pengujian unit program.</p>
+  <p>Penyusunan portfolio ini bertujuan menunjukkan bahwa pengembangan aplikasi bukan sekadar membuat fitur berfungsi, melainkan menerapkan kompetensi pemrograman yang utuh — mulai dari menulis kode bersih, menelusuri bug secara sistematis, mendokumentasikan kontrak fungsi, hingga memastikan kebenaran perilaku melalui pengujian otomatis.</p>
+  <p>Penulis mengucapkan terima kasih kepada dosen pengampu mata kuliah Web Programming yang telah membimbing dalam proses penyelesaian proyek dan portfolio ini. Kritik dan saran yang membangun sangat penulis harapkan demi penyempurnaan dokumen ini.</p>
   <p style="margin-top: 24pt;">Depok, 17 Juni 2026</p>
   <p style="margin-top: 40pt;">Penulis</p>
 </section>
@@ -215,16 +280,19 @@
         <li>1.1 Latar Belakang</li>
         <li>1.2 Tujuan Penyusunan Portfolio</li>
         <li>1.3 Ruang Lingkup</li>
+        <li>1.4 Delapan Unit Kompetensi</li>
       </ol>
     </li>
     <li>BAB II — LANDASAN TEORI
       <ol>
-        <li>2.1 Clean Code dan Coding Standard</li>
-        <li>2.2 Prinsip SOLID</li>
-        <li>2.3 Don&rsquo;t Repeat Yourself (DRY) &amp; KISS</li>
-        <li>2.4 Standar PSR-12 dan Laravel Coding Style</li>
-        <li>2.5 Separation of Concerns &amp; MVC</li>
-        <li>2.6 Security Best Practice (OWASP)</li>
+        <li>2.1 Clean Code, SOLID, DRY &amp; KISS</li>
+        <li>2.2 Debugging dan Logging</li>
+        <li>2.3 Dokumentasi Kode (PHPDoc &amp; JSDoc)</li>
+        <li>2.4 Spesifikasi Program &amp; Type System</li>
+        <li>2.5 Pemrograman Berorientasi Objek</li>
+        <li>2.6 Reuse via Library / Komponen Pre-Existing</li>
+        <li>2.7 Akses Basis Data &amp; ORM</li>
+        <li>2.8 Pengujian Unit (Unit &amp; Feature Test)</li>
       </ol>
     </li>
     <li>BAB III — STACK TEKNOLOGI &amp; TOOLING
@@ -234,20 +302,16 @@
         <li>3.3 Tooling Kualitas Kode</li>
       </ol>
     </li>
-    <li>BAB IV — IMPLEMENTASI BEST PRACTICE
+    <li>BAB IV — IMPLEMENTASI 8 UNIT KOMPETENSI
       <ol>
-        <li>4.1 Struktur Folder Sesuai Konvensi Laravel</li>
-        <li>4.2 PSR-4 Autoloading &amp; Namespace</li>
-        <li>4.3 MVC dan Separation of Concerns</li>
-        <li>4.4 Eloquent ORM &amp; Relasi Polymorphic</li>
-        <li>4.5 Validasi Input pada Boundary</li>
-        <li>4.6 Database Transaction untuk Atomicity</li>
-        <li>4.7 Role-Based Access Control (RBAC) via Middleware</li>
-        <li>4.8 Service Layer untuk Bisnis Logic</li>
-        <li>4.9 Caching Strategy</li>
-        <li>4.10 Type Safety dengan TypeScript</li>
-        <li>4.11 Component-Based UI &amp; Reusability</li>
-        <li>4.12 Defensive Programming &amp; Fallback</li>
+        <li>4.1 Unit 1 — Menulis Kode Dengan Prinsip Sesuai Guidelines &amp; Best Practice</li>
+        <li>4.2 Unit 2 — Melakukan Debugging</li>
+        <li>4.3 Unit 3 — Membuat Dokumen Kode Program</li>
+        <li>4.4 Unit 4 — Menggunakan Spesifikasi Program</li>
+        <li>4.5 Unit 5 — Mengimplementasikan Pemrograman Berorientasi Objek</li>
+        <li>4.6 Unit 6 — Menggunakan Library atau Komponen Pre-Existing</li>
+        <li>4.7 Unit 7 — Menerapkan Akses Basis Data</li>
+        <li>4.8 Unit 8 — Melaksanakan Pengujian Unit Program</li>
       </ol>
     </li>
     <li>BAB V — KESIMPULAN</li>
@@ -260,53 +324,65 @@
   <h2>BAB I &mdash; PENDAHULUAN</h2>
 
   <h3>1.1 Latar Belakang</h3>
-  <p>Sektor <em>e-commerce</em> di Indonesia mengalami pertumbuhan signifikan dalam beberapa tahun terakhir, didukung oleh kemudahan akses internet dan perubahan perilaku konsumen yang lebih memilih berbelanja secara daring. Dalam konteks pengembangan aplikasi <em>e-commerce</em> seperti Order Store, kompleksitas sistem meningkat seiring bertambahnya fitur, seperti manajemen produk, kategori, transaksi pembayaran (Midtrans), pengiriman (kurir &amp; geocoding), serta kontrol hak akses (RBAC).</p>
-  <p>Tanpa disiplin penulisan kode yang baik, kompleksitas tersebut dapat dengan cepat berubah menjadi <em>technical debt</em>: kode menjadi sulit dibaca, sulit dirawat, rawan <em>bug</em>, serta sulit untuk ditambahkan fitur baru. Oleh karena itu, mengikuti <em>guidelines</em> dan <em>best practice</em> dalam menulis kode bukanlah pilihan, melainkan kebutuhan agar sistem dapat tumbuh secara berkelanjutan (<em>scalable</em>) dan aman.</p>
-  <p>Portfolio ini mendokumentasikan bagaimana proyek <strong>Order Store</strong> menerapkan kaidah-kaidah penulisan kode profesional berdasarkan standar komunitas Laravel, PHP-FIG (PSR), React, serta praktik keamanan OWASP.</p>
+  <p>Sektor <em>e-commerce</em> di Indonesia mengalami pertumbuhan signifikan dalam beberapa tahun terakhir, didukung oleh kemudahan akses internet dan perubahan perilaku konsumen yang lebih memilih berbelanja secara daring. Dalam konteks pengembangan aplikasi <em>e-commerce</em> seperti Order Store, kompleksitas sistem meningkat seiring bertambahnya fitur: manajemen produk, kategori, transaksi pembayaran (Midtrans), pengiriman (kurir &amp; <em>geocoding</em>), serta kontrol hak akses (RBAC).</p>
+  <p>Tanpa disiplin penulisan kode yang baik dan kompetensi pemrograman yang utuh, kompleksitas tersebut akan cepat berubah menjadi <em>technical debt</em>: kode menjadi sulit dibaca, sulit dirawat, rawan <em>bug</em>, serta sulit untuk dikembangkan. Oleh karena itu, seorang pengembang profesional harus menguasai bukan satu, melainkan beberapa unit kompetensi sekaligus — dari menulis kode bersih, mendeteksi dan memperbaiki bug, mendokumentasikan kode, hingga menulis pengujian.</p>
+  <p>Portfolio ini mendokumentasikan penerapan delapan unit kompetensi tersebut pada proyek <strong>Order Store</strong>.</p>
 
   <h3>1.2 Tujuan Penyusunan Portfolio</h3>
   <ol>
-    <li>Mendokumentasikan prinsip-prinsip penulisan kode yang diterapkan pada proyek Order Store.</li>
-    <li>Memberikan contoh nyata implementasi <em>best practice</em> langsung dari kode sumber proyek.</li>
-    <li>Menjadi rujukan internal tim agar gaya penulisan kode tetap konsisten ke depannya.</li>
+    <li>Mendokumentasikan penerapan 8 unit kompetensi pemrograman pada proyek Order Store.</li>
+    <li>Memberikan bukti konkret tiap unit kompetensi langsung dari kode sumber proyek.</li>
+    <li>Menjadi rujukan tim agar standar pengembangan tetap konsisten.</li>
     <li>Menjadi bukti kompetensi pengembangan aplikasi web profesional.</li>
   </ol>
 
   <h3>1.3 Ruang Lingkup</h3>
   <ul>
     <li><strong>Codebase</strong>: project <code class="inline">order-store</code> dengan stack Laravel 12, Inertia.js 2, React 19, TypeScript 5, dan Tailwind CSS 4.</li>
-    <li><strong>Fokus</strong>: kaidah penulisan kode (clean code, SOLID, DRY, KISS), arsitektur MVC, keamanan, serta <em>tooling</em> kualitas kode.</li>
-    <li><strong>Di luar lingkup</strong>: dokumentasi fungsional/UAT, infrastruktur deployment, dan analisis performa load testing.</li>
+    <li><strong>Fokus</strong>: penerapan 8 unit kompetensi pemrograman pada kode aplikasi (backend &amp; frontend).</li>
+    <li><strong>Di luar lingkup</strong>: dokumentasi fungsional/UAT, infrastruktur deployment, dan analisis performa <em>load testing</em>.</li>
   </ul>
+
+  <h3>1.4 Delapan Unit Kompetensi</h3>
+  <ol>
+    <li><strong>Menulis Kode Dengan Prinsip Sesuai Guidelines dan Best Practice</strong> — penerapan PSR-12, SOLID, Clean Code, dan konvensi Laravel.</li>
+    <li><strong>Melakukan Debugging</strong> — penggunaan log, stack trace, fallback, dan tools Laravel Pail untuk menelusuri masalah.</li>
+    <li><strong>Membuat Dokumen Kode Program</strong> — PHPDoc, JSDoc, dan komentar konfigurasi (<code class="inline">config/delivery.php</code>) sebagai dokumentasi inline.</li>
+    <li><strong>Menggunakan Spesifikasi Program</strong> — kontrak fungsi via <em>type hints</em> PHP 8, TypeScript, validasi Laravel, dan skema Zod.</li>
+    <li><strong>Mengimplementasikan Pemrograman Berorientasi Objek</strong> — kelas, pewarisan, polimorfisme (<code class="inline">morphMany</code>), enkapsulasi, dan abstraksi.</li>
+    <li><strong>Menggunakan Library atau Komponen Pre-Existing</strong> — Spatie Permission, Inertia, shadcn/ui, Midtrans SDK, Radix UI, Recharts.</li>
+    <li><strong>Menerapkan Akses Basis Data</strong> — migrations, Eloquent ORM, relasi, <em>transaction</em>, dan <em>eager loading</em>.</li>
+    <li><strong>Melaksanakan Pengujian Unit Program</strong> — Pest PHP dengan <em>feature test</em> autentikasi dan dashboard.</li>
+  </ol>
 </section>
 
 <!-- ========== BAB II ========== -->
 <section class="page-break">
   <h2>BAB II &mdash; LANDASAN TEORI</h2>
 
-  <h3>2.1 Clean Code dan Coding Standard</h3>
-  <p>Robert C. Martin (2008) dalam <em>Clean Code</em> menjelaskan bahwa kode bersih adalah kode yang mudah dibaca oleh manusia, bukan hanya oleh mesin. Indikatornya meliputi: penamaan yang ekspresif, fungsi yang pendek dan melakukan satu hal, tidak ada duplikasi, serta dapat dipahami tanpa banyak komentar. Coding standard (gaya penulisan) memastikan setiap anggota tim menulis kode dengan format yang seragam sehingga <em>code review</em> menjadi lebih cepat dan <em>diff</em> lebih informatif.</p>
+  <h3>2.1 Clean Code, SOLID, DRY &amp; KISS</h3>
+  <p>Martin (2008) mendefinisikan <em>clean code</em> sebagai kode yang mudah dibaca manusia. Prinsip SOLID (Martin, 2017) terdiri dari <em>Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, dan Dependency Inversion</em>. DRY (Hunt &amp; Thomas, 1999) menekankan setiap pengetahuan harus memiliki satu representasi otoritatif, sementara KISS mendorong solusi paling sederhana.</p>
 
-  <h3>2.2 Prinsip SOLID</h3>
-  <ul>
-    <li><strong>S</strong>ingle Responsibility Principle — sebuah kelas/fungsi hanya memiliki satu alasan untuk berubah.</li>
-    <li><strong>O</strong>pen/Closed Principle — entitas terbuka untuk ekstensi, tertutup untuk modifikasi.</li>
-    <li><strong>L</strong>iskov Substitution Principle — subkelas harus dapat menggantikan kelas induknya tanpa merusak perilaku.</li>
-    <li><strong>I</strong>nterface Segregation Principle — banyak <em>interface</em> kecil lebih baik daripada satu <em>interface</em> besar.</li>
-    <li><strong>D</strong>ependency Inversion Principle — bergantung pada abstraksi, bukan implementasi.</li>
-  </ul>
+  <h3>2.2 Debugging dan Logging</h3>
+  <p><em>Debugging</em> adalah aktivitas sistematis untuk menemukan, mengisolasi, dan memperbaiki kesalahan perilaku perangkat lunak (McConnell, 2004). Strateginya meliputi reproduksi bug, pembacaan <em>stack trace</em>, <em>logging</em> terstruktur, serta <em>tail logs</em> secara real-time. Laravel menyediakan <code class="inline">Log</code> facade, <em>Whoops</em>, dan paket <code class="inline">laravel/pail</code> untuk <em>tailing</em> log.</p>
 
-  <h3>2.3 Don&rsquo;t Repeat Yourself (DRY) &amp; KISS</h3>
-  <p>DRY (Hunt &amp; Thomas, 1999) menekankan bahwa setiap pengetahuan dalam sistem harus memiliki satu representasi otoritatif. KISS (<em>Keep It Simple, Stupid</em>) mendorong solusi paling sederhana yang menyelesaikan masalah, menghindari abstraksi prematur.</p>
+  <h3>2.3 Dokumentasi Kode (PHPDoc &amp; JSDoc)</h3>
+  <p>Dokumentasi inline (<em>PHPDoc</em> untuk PHP, <em>JSDoc</em> untuk JS/TS) memberikan <em>contract</em> tertulis tentang parameter, tipe kembalian, dan efek samping fungsi. Standar PSR-5 mengatur format <em>docblock</em> PHP. Komentar konfigurasi pada file <code class="inline">config/*.php</code> Laravel juga merupakan bentuk dokumentasi <em>self-explanatory</em> yang sangat membantu pemeliharaan.</p>
 
-  <h3>2.4 Standar PSR-12 dan Laravel Coding Style</h3>
-  <p>PHP-FIG menerbitkan PSR-12 sebagai standar gaya penulisan kode PHP modern (indentasi 4 spasi, deklarasi <em>namespace</em>, urutan <em>use statement</em>, dsb.). Laravel memiliki gaya bawaan yang merupakan ekstensi PSR-12 dan dapat ditegakkan otomatis dengan tool <code class="inline">laravel/pint</code>.</p>
+  <h3>2.4 Spesifikasi Program &amp; Type System</h3>
+  <p>Spesifikasi program adalah deskripsi formal tentang apa yang harus dilakukan sistem. Pada level kode, spesifikasi diekspresikan melalui <em>type hints</em> (PHP 8 union/return types), TypeScript di frontend, skema validasi (Laravel <code class="inline">validate()</code>, Zod), dan dokumentasi <em>endpoint</em>.</p>
 
-  <h3>2.5 Separation of Concerns &amp; MVC</h3>
-  <p>Pola Model-View-Controller (MVC) memisahkan logika data (Model), presentasi (View), dan kontrol alur (Controller). Pada arsitektur Inertia.js, peran <em>View</em> diisi oleh komponen React yang menerima <em>props</em> langsung dari Controller Laravel — menjaga frontend dan backend tetap terpisah tetapi terintegrasi rapi.</p>
+  <h3>2.5 Pemrograman Berorientasi Objek</h3>
+  <p>OOP didasarkan pada empat pilar: <em>encapsulation</em>, <em>inheritance</em>, <em>polymorphism</em>, dan <em>abstraction</em>. Pada Laravel, model Eloquent meng-<em>extend</em> kelas <code class="inline">Model</code>, controller meng-<em>extend</em> <code class="inline">Controller</code>, dan relasi <em>morphMany</em> merupakan bentuk polimorfisme yang nyata pada level domain.</p>
 
-  <h3>2.6 Security Best Practice (OWASP)</h3>
-  <p>OWASP Top 10 mencantumkan ancaman seperti <em>Broken Access Control</em>, <em>Injection</em>, <em>Cross-Site Scripting</em>, dan <em>Insecure Design</em>. Aplikasi yang baik harus memitigasi ancaman ini melalui validasi input, parameter binding pada query, otorisasi terstruktur, serta proteksi CSRF.</p>
+  <h3>2.6 Reuse via Library / Komponen Pre-Existing</h3>
+  <p>Menulis ulang fungsionalitas yang sudah tersedia di ekosistem adalah <em>anti-pattern</em>. Composer (PHP) dan npm (JS) memungkinkan kita mengkurasi <em>library</em> berkualitas: Spatie Permission untuk RBAC, Midtrans SDK untuk pembayaran, shadcn/ui &amp; Radix UI untuk komponen UI yang <em>accessible</em>, dsb.</p>
+
+  <h3>2.7 Akses Basis Data &amp; ORM</h3>
+  <p>Akses basis data modern menghindari <em>query mentah</em> demi keamanan (anti SQL injection) dan keterbacaan. Eloquent ORM Laravel menyediakan <em>fluent interface</em>, <em>eager loading</em> untuk menghindari N+1, dan <em>migrations</em> sebagai versi schema yang dapat diaudit.</p>
+
+  <h3>2.8 Pengujian Unit (Unit &amp; Feature Test)</h3>
+  <p>Unit test memverifikasi perilaku komponen kecil secara terisolasi; <em>feature test</em> memverifikasi interaksi lintas komponen (HTTP request → response). Pest PHP adalah framework testing ekspresif yang berjalan di atas PHPUnit. SQLite <em>in-memory</em> dipakai sebagai database test agar cepat dan reproducible.</p>
 </section>
 
 <!-- ========== BAB III ========== -->
@@ -314,6 +390,7 @@
   <h2>BAB III &mdash; STACK TEKNOLOGI &amp; TOOLING</h2>
 
   <h3>3.1 Backend Stack</h3>
+  <div class="table-wrap">
   <table>
     <thead><tr><th>Komponen</th><th>Versi</th><th>Fungsi</th></tr></thead>
     <tbody>
@@ -324,10 +401,14 @@
       <tr><td>Spatie Laravel Permission</td><td>^6.24</td><td>Implementasi RBAC (roles &amp; permissions).</td></tr>
       <tr><td>Midtrans PHP SDK</td><td>^2.6</td><td>Integrasi <em>payment gateway</em>.</td></tr>
       <tr><td>Laravel Wayfinder</td><td>^0.1.9</td><td>Generator route helper untuk TypeScript frontend.</td></tr>
+      <tr><td>Laravel Pail</td><td>^1.2</td><td><em>Real-time log tailing</em> untuk debugging.</td></tr>
+      <tr><td>Pest PHP</td><td>^4.1</td><td>Framework pengujian (Unit + Feature).</td></tr>
     </tbody>
   </table>
+  </div>
 
   <h3>3.2 Frontend Stack</h3>
+  <div class="table-wrap">
   <table>
     <thead><tr><th>Komponen</th><th>Versi</th><th>Fungsi</th></tr></thead>
     <tbody>
@@ -341,6 +422,7 @@
       <tr><td>recharts</td><td>^2.15</td><td>Visualisasi data dashboard.</td></tr>
     </tbody>
   </table>
+  </div>
 
   <h3>3.3 Tooling Kualitas Kode</h3>
   <ul>
@@ -349,91 +431,304 @@
     <li><strong>ESLint</strong> (typescript-eslint, react, react-hooks) — analisis statis untuk menemukan <em>code smell</em>.</li>
     <li><strong>TypeScript <code class="inline">--noEmit</code></strong> — type checking di CI.</li>
     <li><strong>Pest PHP</strong> — framework <em>testing</em> dengan sintaks ekspresif.</li>
-    <li><strong>Docker + Nginx</strong> — standardisasi lingkungan eksekusi (lihat <code class="inline">Dockerfile</code> dan <code class="inline">nginx.conf</code>).</li>
+    <li><strong>Docker + Nginx</strong> — standardisasi lingkungan eksekusi.</li>
   </ul>
 </section>
 
 <!-- ========== BAB IV ========== -->
 <section class="page-break">
-  <h2>BAB IV &mdash; IMPLEMENTASI BEST PRACTICE</h2>
+  <h2>BAB IV &mdash; IMPLEMENTASI 8 UNIT KOMPETENSI</h2>
 
-  <h3>4.1 Struktur Folder Sesuai Konvensi Laravel</h3>
-  <p>Project mengikuti struktur direktori standar Laravel sehingga setiap pengembang baru dapat segera memahami letak setiap bagian sistem tanpa perlu dokumentasi tambahan:</p>
+  <!-- ===== UNIT 1 ===== -->
+  <h3>4.1 <span class="unit-tag">Unit 1</span>Menulis Kode Dengan Prinsip Sesuai Guidelines &amp; Best Practice</h3>
+
+  <h4>4.1.1 Struktur Folder Mengikuti Konvensi Laravel</h4>
 <pre>order-store/
 ├── app/
 │   ├── Http/Controllers/        ← Controller (ProductController, ShipmentController, ...)
 │   ├── Http/Middleware/         ← Middleware kustom
 │   ├── Http/Requests/           ← Form Request validation
-│   ├── Models/                  ← Eloquent models (Product, Category, Image, Transaction, Shipment, User)
-│   ├── Providers/               ← Service providers (AppServiceProvider, FortifyServiceProvider)
+│   ├── Models/                  ← Eloquent models (Product, Category, Image, Transaction, ...)
+│   ├── Providers/               ← Service providers
 │   └── Services/                ← Service layer (DeliveryService)
 ├── database/migrations/         ← Versi schema database
 ├── resources/js/                ← Source TSX (React + Inertia)
-│   ├── pages/                   ← Halaman (admin, auth, dashboard, users, settings)
-│   ├── components/              ← Reusable components (shadcn-style)
-│   ├── layouts/                 ← Layout wrapper
-│   ├── hooks/, lib/, types/     ← Utilities, custom hooks, type definitions
-│   └── routes/, wayfinder/      ← Type-safe route helpers (Wayfinder generated)
 ├── routes/                      ← web.php, auth.php, settings.php, console.php
 └── config/, public/, tests/</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> struktur folder mengikuti <em>convention</em> Laravel: Controller, Model, dan Middleware berada pada subfolder yang sudah diharapkan. Folder <code class="inline">app/Services/</code> ditambahkan untuk menampung <em>business logic</em> kompleks (mis. perhitungan ongkir) supaya Controller tetap ringkas. Frontend React/Inertia hidup di <code class="inline">resources/js/</code> sehingga backend (PHP) dan frontend (TSX) terpisah tetapi tetap dalam satu monorepo.</p>
 
-  <div class="principle-card">
-    <h4>Prinsip yang diterapkan</h4>
-    <p><strong>Convention over Configuration.</strong> Dengan mengikuti konvensi bawaan Laravel, kami menghindari pengulangan keputusan struktur. Anggota tim baru dapat <em>onboarding</em> lebih cepat.</p>
-  </div>
-
-  <h3>4.2 PSR-4 Autoloading &amp; Namespace</h3>
-  <p>Setiap kelas PHP dipetakan dengan namespace sesuai PSR-4 melalui <code class="inline">composer.json</code>:</p>
-<pre>"autoload": {
+  <h4>4.1.2 PSR-4 Autoloading &amp; Namespace</h4>
+<pre>// composer.json
+"autoload": {
     "psr-4": {
         "App\\": "app/",
         "Database\\Factories\\": "database/factories/",
         "Database\\Seeders\\": "database/seeders/"
     }
 }</pre>
-  <p>Penggunaan namespace memungkinkan setiap kelas memiliki identitas unik dan dapat di-<em>autoload</em> tanpa <code class="inline">require</code> manual. Contoh penerapan dalam controller:</p>
-<pre>namespace App\Http\Controllers;
+  <p class="code-explain"><strong>Penjelasan:</strong> blok <code class="inline">psr-4</code> memetakan <em>namespace</em> ke folder. Artinya kelas <code class="inline">App\Models\Product</code> otomatis dimuat dari <code class="inline">app/Models/Product.php</code> tanpa perlu <code class="inline">require</code> manual. Hal ini menjamin tidak ada nama kelas yang bentrok dan membuat <em>code search</em> antar editor menjadi sangat cepat.</p>
 
-use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Inertia\Inertia;</pre>
-  <p>Urutan <code class="inline">use</code> dikelola secara alfabetis dan dipisahkan per vendor — sebuah praktik yang ditegakkan otomatis oleh Laravel Pint.</p>
+  <h4>4.1.3 Single Responsibility &amp; Separation of Concerns</h4>
+  <p>Controller bertanggung jawab atas alur HTTP, Model atas struktur data, dan Service Layer atas logika bisnis non-trivial (mis. <code class="inline">DeliveryService</code> menghitung ongkir).</p>
 
-  <h3>4.3 MVC dan Separation of Concerns</h3>
-  <p>Setiap permintaan HTTP dilayani oleh tiga lapisan terpisah:</p>
-  <ul>
-    <li><strong>Model</strong>: <code class="inline">app/Models/Product.php</code> — mendefinisikan tabel, kolom <em>fillable</em>, <em>casting</em>, dan relasi.</li>
-    <li><strong>Controller</strong>: <code class="inline">ProductController</code> — mengelola alur permintaan, validasi, dan response.</li>
-    <li><strong>View</strong>: komponen React via Inertia, mis. <code class="inline">resources/js/pages/admin/products/index.tsx</code>.</li>
-  </ul>
-<pre>// app/Http/Controllers/ProductController.php
-public function index()
-{
-    return Inertia::render('admin/products/index', [
-        'categories' => Product::all()
+  <h4>4.1.4 Konsistensi Gaya via Tooling</h4>
+  <p>Laravel Pint, Prettier, ESLint, dan TypeScript <code class="inline">--noEmit</code> dijalankan agar gaya penulisan seragam tanpa beban manual.</p>
+
+  <div class="principle-card">
+    <h4>Hasil Penerapan</h4>
+    <p><em>Onboarding</em> pengembang baru menjadi cepat karena struktur project bersifat <em>self-explanatory</em>, dan <em>code review</em> dapat fokus pada substansi bukan format.</p>
+  </div>
+
+</section>
+
+<!-- ===== UNIT 2 ===== -->
+<section class="page-break">
+  <h3>4.2 <span class="unit-tag">Unit 2</span>Melakukan Debugging</h3>
+
+  <h4>4.2.1 Logging Terstruktur via Facade <code class="inline">Log</code></h4>
+  <p>Kegagalan integrasi pihak ketiga ditangkap dan dicatat ke log tanpa menghentikan alur utama, sehingga developer tetap punya jejak audit ketika terjadi kegagalan diam-diam (<em>silent failure</em>).</p>
+<pre>// app/Services/DeliveryService.php
+use Illuminate\Support\Facades\Log;
+
+try {
+    $response = Http::withHeaders([
+        'User-Agent' =&gt; config('app.name', 'Laravel').' delivery geocoder',
+    ])-&gt;timeout(8)-&gt;get(config('delivery.geocode_url'), [
+        'q' =&gt; $query,
+        'format' =&gt; 'json',
+        'limit' =&gt; 1,
+        'countrycodes' =&gt; config('delivery.geocode_country'),
     ]);
+
+    // ... proses response
+} catch (\Throwable $e) {
+    Log::warning('Delivery geocoding failed: '.$e-&gt;getMessage());
 }</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> panggilan ke API OpenStreetMap Nominatim dibungkus dengan <code class="inline">try/catch</code>. Apabila terjadi <em>exception</em> (timeout, DNS gagal, format JSON tidak valid), pesan kesalahan dicatat pada channel log Laravel via <code class="inline">Log::warning()</code>. Cara ini lebih baik daripada <code class="inline">die()</code> atau membiarkan <em>exception</em> bocor — pengguna tetap mendapat respons, sementara developer punya jejak audit untuk investigasi melalui <code class="inline">storage/logs/laravel.log</code>.</p>
+
+  <h4>4.2.2 Defensive Fallback agar Sistem Tetap Berjalan</h4>
+  <p>Saat geocoding gagal, sistem tidak melemparkan error ke pengguna; pengguna tetap memperoleh estimasi ongkir dari <code class="inline">fallback_fee</code>, sementara developer memperoleh log untuk investigasi.</p>
+<pre>if (! $coords) {
+    return [
+        'distance_km'   =&gt; null,
+        'shipping_cost' =&gt; (int) config('delivery.fallback_fee'),
+        'geocoded'      =&gt; false,
+    ];
+}</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> blok <code class="inline">if (! $coords)</code> menangani kasus ketika <em>geocoding</em> tidak berhasil menemukan koordinat. Daripada <em>throw exception</em>, sistem mengembalikan tarif tetap dari konfigurasi (<code class="inline">delivery.fallback_fee</code>) dan menandai <code class="inline">geocoded =&gt; false</code>. Frontend kemudian dapat menampilkan pesan informatif (mis. &ldquo;estimasi sementara&rdquo;) — proses checkout tetap berlanjut dan tidak ada user-facing error.</p>
+
+  <h4>4.2.3 Real-Time Log Tailing dengan Laravel Pail</h4>
+  <p>Paket <code class="inline">laravel/pail</code> diaktifkan sebagai <code class="inline">require-dev</code> dan dapat dipanggil dengan:</p>
+<pre>php artisan pail            # streaming semua log
+php artisan pail --filter=ERROR  # filter level error saja</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> perintah <code class="inline">pail</code> men-<em>stream</em> log Laravel ke terminal secara real-time. Sangat berguna saat reproduksi bug — developer dapat melihat detail event (mis. <em>query</em> SQL, <em>exception</em>, <em>deprecation</em>) tepat saat aksi dilakukan di browser. Argumen <code class="inline">--filter</code> memungkinkan menyaring berdasarkan level, sehingga tidak terkubur oleh log informatif.</p>
+
+  <h4>4.2.4 Exception Penanganan Aman pada File Storage</h4>
+  <p>Saat menghapus gambar produk yang sudah tidak terpakai, kegagalan menghapus file fisik dibungkus <code class="inline">try/catch</code> agar transaksi DB tidak gagal hanya karena file sudah tidak ada di disk.</p>
+<pre>// app/Http/Controllers/ProductController.php
+foreach ($toDelete as $img) {
+    try {
+        Storage::disk('public')-&gt;delete($img-&gt;image_path);
+    } catch (\Throwable $e) {
+        // optional: log — file sudah tidak ada, abaikan
+    }
+    $img-&gt;delete();
+}</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> setiap gambar yang akan dihapus diproses dalam dua langkah — hapus file fisik di disk, kemudian hapus baris pada tabel <code class="inline">images</code>. Kegagalan menghapus file (mis. file sudah terlanjur dihapus admin lain) tidak boleh menghentikan proses. Penangkapan <code class="inline">\Throwable</code> menjamin kondisi tersebut <em>tidak</em> merusak transaksi besar yang sedang berlangsung.</p>
+
+  <h4>4.2.5 Validasi Sebagai Bentuk Pencegahan Bug</h4>
+  <p>Sebagian besar bug pada aplikasi web berasal dari input yang tidak terduga. Validasi pada controller (lihat 4.4) berperan sebagai <em>defensive line</em> pertama.</p>
+</section>
+
+<!-- ===== UNIT 3 ===== -->
+<section class="page-break">
+  <h3>4.3 <span class="unit-tag">Unit 3</span>Membuat Dokumen Kode Program</h3>
+
+  <h4>4.3.1 PHPDoc dengan Tipe Return Terstruktur</h4>
+  <p>Setiap method publik pada <code class="inline">DeliveryService</code> diberi <em>docblock</em> yang menjelaskan tujuan, parameter, dan struktur nilai kembalian.</p>
+<pre>// app/Services/DeliveryService.php
+
+/**
+ * Build a shipping quote for a destination address.
+ *
+ * Geocodes the address, measures the distance from the store origin and
+ * applies a pure per-km rate. Falls back to a flat fee when the address
+ * cannot be located so checkout never breaks.
+ *
+ * @return array{distance_km: float|null, shipping_cost: int, geocoded: bool}
+ */
+public function quote(string $address, ?string $city = null, /* ... */): array
+{
+    // ...
+}
+
+/**
+ * Geocode an address string to coordinates via OpenStreetMap Nominatim.
+ * Successful lookups are cached for 30 days; failures are not cached.
+ *
+ * @return array{lat: float, lng: float}|null
+ */
+protected function geocode(string $query): ?array { /* ... */ }
+
+/**
+ * Great-circle distance between two coordinates, in kilometres.
+ */
+protected function haversine(float $lat1, float $lon1, float $lat2, float $lon2): float
+{
+    // ...
+}</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> <em>docblock</em> menjelaskan <strong>apa</strong> yang dilakukan fungsi, <strong>mengapa</strong> ada <em>fallback</em>, serta <strong>struktur</strong> nilai kembalian via sintaks <code class="inline">array{distance_km: float|null, ...}</code>. IDE seperti PhpStorm/VS Code memanfaatkan ini untuk autocomplete, sehingga pemanggil tahu pasti kunci array yang tersedia. Komentar bahasa Inggris dipakai konsisten dengan ekosistem Laravel.</p>
+
+  <h4>4.3.2 Dokumentasi Konfigurasi yang Self-Explanatory</h4>
+  <p>Setiap parameter konfigurasi pada <code class="inline">config/delivery.php</code> dilengkapi komentar blok yang menjelaskan <em>mengapa</em> nilainya ada dan kapan harus diubah.</p>
+<pre>// config/delivery.php
+return [
+    /*
+    |--------------------------------------------------------------------------
+    | Delivery Origin
+    |--------------------------------------------------------------------------
+    |
+    | The coordinates the package is dispatched from (your store / warehouse).
+    | Distance to the customer is measured from this point. Defaults to a
+    | central Jakarta coordinate; override per deployment via .env.
+    |
+    */
+    'origin' =&gt; [
+        'lat' =&gt; (float) env('DELIVERY_ORIGIN_LAT', -6.200000),
+        'lng' =&gt; (float) env('DELIVERY_ORIGIN_LNG', 106.816666),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pricing
+    |--------------------------------------------------------------------------
+    |
+    | Flat rate charged per kilometre (rounded up, minimum 1 km). When the
+    | address cannot be geocoded we fall back to a flat fee so checkout never
+    | breaks.
+    |
+    */
+    'rate_per_km'  =&gt; (int) env('DELIVERY_RATE_PER_KM', 2000),
+    'fallback_fee' =&gt; (int) env('DELIVERY_FALLBACK_FEE', 15000),
+];</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> setiap kunci konfigurasi diberi komentar blok bergaya Laravel. Komentar menjelaskan <em>tujuan</em> nilai (mis. titik origin pengiriman), <em>default</em>, dan <em>cara override</em> via file <code class="inline">.env</code>. Tipe nilai juga di-<em>cast</em> eksplisit (mis. <code class="inline">(float)</code>, <code class="inline">(int)</code>) agar konfigurasi selalu konsisten meskipun ENV dibaca sebagai string.</p>
+
+  <h4>4.3.3 Komentar Inline Pada Logika yang Tidak Obvious</h4>
+<pre>// Try the most specific query first, then progressively coarser ones.
+// A vague house-level address often isn't in OpenStreetMap, so falling
+// back to the official village (kelurahan/desa) then district then
+// city/province still gives a usable distance instead of the flat fee.
+$candidates = array_unique(array_filter([
+    implode(', ', array_filter([$address, $village, $district, $city, $province, $postalCode])),
+    implode(', ', array_filter([$village, $district, $city, $province])),
+    // ...
+]));</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> komentar menjelaskan <em>mengapa</em> ada beberapa kandidat query, bukan sekadar apa. Tanpa konteks ini, pembaca akan kebingungan kenapa alamat dipecah menjadi varian yang semakin kasar. Inilah komentar &ldquo;berhak hidup&rdquo;: yang menjelaskan keputusan desain, bukan parafrase kode.</p>
+
+  <h4>4.3.4 Komentar Pengelompokan Rute</h4>
+  <p>Pada <code class="inline">routes/web.php</code> setiap kelompok izin diberi penanda agar mudah ditelusuri ketika menambah rute baru:</p>
+<pre>// 1. Product Create
+Route::middleware(['permission:product.create'])-&gt;group(function () { /* ... */ });
+
+// 2. Edit/Update Permissions
+Route::middleware(['permission:product.edit'])-&gt;group(function () { /* ... */ });
+
+// 3. View Product
+Route::middleware(['permission:product.view'])-&gt;group(function () { /* ... */ });
+
+// 4. Delete Product
+Route::middleware(['permission:product.delete'])-&gt;group(function () { /* ... */ });</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> rute CRUD produk dibagi ke 4 kelompok berdasarkan izin (<em>create, edit, view, delete</em>). Komentar bernomor membuat skema CRUD mudah ditemukan dengan <em>Ctrl+F</em>. Ketika menambah rute baru, developer cukup memasukkannya pada grup izin yang tepat.</p>
+</section>
+
+<!-- ===== UNIT 4 ===== -->
+<section class="page-break">
+  <h3>4.4 <span class="unit-tag">Unit 4</span>Menggunakan Spesifikasi Program</h3>
+
+  <h4>4.4.1 Spesifikasi via PHP Type Hints &amp; Return Types</h4>
+  <p>Setiap parameter dan nilai kembalian fungsi diberi tipe yang ketat sehingga kontrak fungsi terbaca dari signaturnya:</p>
+<pre>public function quote(
+    string $address,
+    ?string $city = null,
+    ?string $province = null,
+    ?string $postalCode = null,
+    ?string $district = null,
+    ?string $village = null
+): array { /* ... */ }
+
+protected function geocode(string $query): ?array { /* ... */ }
+protected function haversine(float $lat1, float $lon1, float $lat2, float $lon2): float { /* ... */ }
+
+public function store(Request $request): RedirectResponse { /* ... */ }</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> tanda <code class="inline">?</code> pada <code class="inline">?string</code> berarti parameter boleh <code class="inline">null</code>. Tipe pengembalian (<code class="inline">: array</code>, <code class="inline">: ?array</code>, <code class="inline">: float</code>, <code class="inline">: RedirectResponse</code>) menjadi spesifikasi yang dipaksakan PHP saat runtime — bila implementasi mengembalikan tipe lain, error langsung muncul.</p>
+
+  <h4>4.4.2 Spesifikasi Validasi Input</h4>
+  <p>Validasi Laravel adalah bentuk spesifikasi yang dijalankan saat runtime untuk memastikan kontrak input dari klien terpenuhi:</p>
+<pre>// app/Http/Controllers/ProductController.php
+$validated = $request-&gt;validate([
+    'title'        =&gt; ['required', 'string', 'max:255'],
+    'description'  =&gt; ['required', 'string'],
+    'price'        =&gt; ['required', 'numeric'],
+    'is_featured'  =&gt; ['required'],
+    'is_limited'   =&gt; ['required'],
+    'stock'        =&gt; ['required', 'integer'],
+    'category_id'  =&gt; ['required', 'exists:categories,id'],
+    'images'       =&gt; ['sometimes', 'array'],
+    'images.*'     =&gt; ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+]);</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> aturan didefinisikan sebagai array. <code class="inline">required</code> memaksa field harus ada; <code class="inline">exists:categories,id</code> memastikan <code class="inline">category_id</code> benar-benar ada di tabel <code class="inline">categories</code> (sekaligus pencegahan <em>foreign key violation</em>); <code class="inline">images.*</code> dengan rule <code class="inline">image|mimes|max:4096</code> menjamin setiap file adalah gambar (jpg/jpeg/png/webp) berukuran maksimal 4 MB. Bila gagal, Laravel otomatis mengembalikan response 422 dengan pesan kesalahan terstruktur.</p>
+
+  <h4>4.4.3 Spesifikasi Tipe di Frontend (TypeScript)</h4>
+  <p>Komponen halaman menerima <em>props</em> yang tipenya didefinisikan di <code class="inline">resources/js/types/</code>:</p>
 <pre>// resources/js/pages/dashboard.tsx
-import { ChartAreaInteractive } from '@/components/chart-area-interactive';
-import { SectionCards } from '@/components/section-cards';
-import AppLayout from '@/layouts/app-layout';
-import { Head } from '@inertiajs/react';
+import { dashboard } from '@/routes';
+import { type BreadcrumbItem } from '@/types';
+
+const breadcrumbs: BreadcrumbItem[] = [
+    { title: 'Dashboard', href: dashboard().url },
+];
 
 export default function Dashboard() {
-  return (
-    &lt;AppLayout breadcrumbs={breadcrumbs}&gt;
-      &lt;Head title="Dashboard" /&gt;
-      &lt;SectionCards /&gt;
-      &lt;ChartAreaInteractive /&gt;
-    &lt;/AppLayout&gt;
-  );
+    return (
+        &lt;AppLayout breadcrumbs={breadcrumbs}&gt;
+            &lt;Head title="Dashboard" /&gt;
+            &lt;SectionCards /&gt;
+            &lt;ChartAreaInteractive /&gt;
+        &lt;/AppLayout&gt;
+    );
 }</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> tipe <code class="inline">BreadcrumbItem[]</code> diimpor sebagai <em>type-only import</em> sehingga tidak masuk bundle JavaScript. Bila ada properti <code class="inline">title</code> atau <code class="inline">href</code> yang lupa diset atau salah ketik, TypeScript akan menggagalkan <em>compile</em> sebelum kode dijalankan di browser.</p>
 
-  <h3>4.4 Eloquent ORM &amp; Relasi Polymorphic</h3>
-  <p>Sebagai pengganti query SQL mentah, kami menggunakan Eloquent ORM yang aman dari SQL injection (parameter binding otomatis) dan ekspresif:</p>
+  <h4>4.4.4 Spesifikasi via Laravel Wayfinder</h4>
+  <p>Wayfinder meng-<em>generate</em> helper rute bertipe sehingga kesalahan nama rute terdeteksi pada saat <em>compile-time</em>, bukan <em>runtime</em>. Contoh: <code class="inline">dashboard().url</code> akan gagal kompilasi bila rute tidak terdaftar.</p>
+
+  <h4>4.4.5 Spesifikasi Skema Database via Migrations</h4>
+  <p>Spesifikasi struktur tabel diekspresikan secara deklaratif dalam migration, lengkap dengan <em>foreign key constraint</em>:</p>
+<pre>// database/migrations/2025_10_02_114918_create_products_table.php
+Schema::create('products', function (Blueprint $table) {
+    $table-&gt;id();
+    $table-&gt;string('title');
+    $table-&gt;text('description');
+    $table-&gt;bigInteger('price');
+    $table-&gt;integer('stock')-&gt;default(0);
+    $table-&gt;unsignedBigInteger('category_id')-&gt;default(0);
+    $table-&gt;foreign('category_id')-&gt;references('id')-&gt;on('categories')-&gt;onDelete('cascade');
+    $table-&gt;timestamps();
+});</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> blok ini mendefinisikan tabel <code class="inline">products</code> secara deklaratif. Kolom <code class="inline">price</code> menggunakan <code class="inline">bigInteger</code> agar mampu menyimpan harga dalam Rupiah tanpa kehilangan presisi (tidak ada <em>floating-point</em>). <code class="inline">onDelete('cascade')</code> memastikan ketika kategori dihapus, produk turunannya ikut dihapus — sehingga tidak ada data <em>orphan</em>.</p>
+</section>
+
+<!-- ===== UNIT 5 ===== -->
+<section class="page-break">
+  <h3>4.5 <span class="unit-tag">Unit 5</span>Mengimplementasikan Pemrograman Berorientasi Objek</h3>
+
+  <h4>4.5.1 Inheritance — Model Extends Eloquent Model</h4>
 <pre>// app/Models/Product.php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
 class Product extends Model
 {
     use HasFactory;
@@ -441,6 +736,10 @@ class Product extends Model
     protected $fillable = [
         'title', 'description', 'is_featured', 'is_limited',
         'stock', 'category_id', 'price',
+    ];
+
+    protected $casts = [
+        'options' =&gt; 'array',
     ];
 
     public function images()
@@ -453,33 +752,190 @@ class Product extends Model
         return $this-&gt;belongsTo(Category::class);
     }
 }</pre>
-  <p>Relasi <code class="inline">morphMany</code> memungkinkan satu tabel <code class="inline">images</code> dipakai untuk berbagai entitas (Product, User, dll.) tanpa duplikasi tabel.</p>
+  <p class="code-explain"><strong>Penjelasan:</strong> kelas <code class="inline">Product</code> mewarisi <code class="inline">Illuminate\Database\Eloquent\Model</code>, sehingga otomatis mendapat kemampuan CRUD (<code class="inline">create</code>, <code class="inline">find</code>, <code class="inline">update</code>, <code class="inline">delete</code>) tanpa menulis SQL. Properti <code class="inline">$fillable</code> adalah <em>mass-assignment guard</em> — hanya kolom dalam daftar yang boleh diisi via array, mencegah eksploitasi yang menyusupkan kolom sensitif. <code class="inline">$casts</code> mengonversi kolom JSON menjadi array PHP secara otomatis.</p>
 
-  <h3>4.5 Validasi Input pada Boundary</h3>
-  <p>Sesuai prinsip <em>Trust internal code, validate at system boundaries</em>, setiap input dari klien divalidasi langsung pada controller sebelum diproses lebih lanjut:</p>
+  <h4>4.5.2 Polymorphism — Relasi <code class="inline">morphMany</code></h4>
+  <p>Tabel <code class="inline">images</code> dapat menjadi gambar untuk <em>banyak</em> entitas berbeda (Product, User, Category) tanpa duplikasi tabel. Inilah bentuk polimorfisme pada level domain.</p>
+
+  <h4>4.5.3 Encapsulation — Private Method &amp; Visibility Modifier</h4>
+  <p>Method utilitas internal pada controller di-<em>private</em>-kan agar tidak diakses dari luar:</p>
 <pre>// app/Http/Controllers/ProductController.php
-public function store(Request $request): RedirectResponse
+private function normalizeImagePath(?string $input): ?string
 {
-    $validated = $request-&gt;validate([
-        'title'        =&gt; ['required', 'string', 'max:255'],
-        'description'  =&gt; ['required', 'string'],
-        'price'        =&gt; ['required', 'numeric'],
-        'is_featured'  =&gt; ['required'],
-        'is_limited'   =&gt; ['required'],
-        'stock'        =&gt; ['required', 'integer'],
-        'category_id'  =&gt; ['required', 'exists:categories,id'],
-        'images'       =&gt; ['sometimes', 'array'],
-        'images.*'     =&gt; ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
-    ]);
-    // ... lanjut proses dengan $validated
+    if (!$input) return null;
+    $input = trim($input);
+    $input = preg_replace('#^https?://[^/]+/storage/#i', '', $input);
+    $input = preg_replace('#^/storage/#i', '', $input);
+    if (!preg_match('#^uploads/products/#i', $input)) {
+        return null;
+    }
+    return $input;
+}
+
+private function mapProductData($product) { /* ... */ }</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> method <code class="inline">normalizeImagePath</code> dibuat <code class="inline">private</code> karena hanya bermanfaat di dalam <code class="inline">ProductController</code>. Modifier akses ini adalah bentuk <em>enkapsulasi</em>: detail implementasi (mis. regex pembersih URL) tersembunyi dan tidak dapat dipanggil oleh kode di luar kelas. Method juga melakukan <em>path traversal guard</em> dengan menolak path di luar <code class="inline">uploads/products/</code>.</p>
+<pre>// DeliveryService — geocode &amp; haversine adalah detail internal
+protected function geocode(string $query): ?array { /* ... */ }
+protected function haversine(/* ... */): float { /* ... */ }</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> dua method ini dibuat <code class="inline">protected</code> — boleh dipanggil oleh subkelas (misalnya jika nanti ada <code class="inline">FastDeliveryService extends DeliveryService</code>), tetapi tidak boleh dipanggil langsung dari luar. Ini menjaga kontrak publik tetap kecil (hanya <code class="inline">quote()</code>).</p>
+
+  <h4>4.5.4 Abstraction — Service Layer</h4>
+  <p>Controller tidak mengetahui detail <em>geocoding</em> dan kalkulasi jarak. Ia hanya memanggil <code class="inline">$service-&gt;quote(...)</code> dan menerima hasil:</p>
+<pre>$service = app(DeliveryService::class);
+$quote = $service-&gt;quote($address, $city, $province, $postalCode, $district, $village);
+// $quote sekarang berisi distance_km, shipping_cost, geocoded</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> <code class="inline">app(DeliveryService::class)</code> meminta instance dari Laravel Service Container. Controller hanya peduli pada kontrak publik (<code class="inline">quote()</code>) — apakah di belakangnya pakai OpenStreetMap, Google Maps, atau hardcode tidak menjadi urusan controller. Inilah <em>abstraction</em>: detail rumit disembunyikan di balik antarmuka sederhana.</p>
+
+  <h4>4.5.5 Trait — Pewarisan Horizontal</h4>
+  <p><code class="inline">HasFactory</code> di-<em>use</em> pada model untuk menambahkan kapabilitas factory tanpa perlu pewarisan vertikal. Ini contoh <em>composition over inheritance</em>.</p>
+
+  <h4>4.5.6 OOP di Frontend — Komponen sebagai Kelas Logis</h4>
+  <p>Komponen React dengan TypeScript dapat dianggap sebagai &ldquo;objek&rdquo; yang memiliki <em>props</em> (kontrak input) dan <em>state</em> (enkapsulasi internal). Pemisahan ke berkas seperti <code class="inline">app-header.tsx</code>, <code class="inline">app-sidebar.tsx</code>, dan <code class="inline">nav-main.tsx</code> mencerminkan <em>single responsibility</em> di sisi UI.</p>
+</section>
+
+<!-- ===== UNIT 6 ===== -->
+<section class="page-break">
+  <h3>4.6 <span class="unit-tag">Unit 6</span>Menggunakan Library atau Komponen Pre-Existing</h3>
+
+  <h4>4.6.1 Library Backend (Composer)</h4>
+<pre>// composer.json
+"require": {
+    "php": "^8.2",
+    "inertiajs/inertia-laravel": "^2.0",
+    "laravel/fortify": "^1.30",
+    "laravel/framework": "^12.0",
+    "laravel/tinker": "^2.10.1",
+    "laravel/wayfinder": "^0.1.9",
+    "midtrans/midtrans-php": "^2.6",
+    "spatie/laravel-permission": "^6.24"
 }</pre>
-  <div class="principle-card">
-    <h4>Mengapa penting?</h4>
-    <p>Mencegah <strong>Mass Assignment</strong>, <strong>Type Confusion</strong>, serta upload file berbahaya. Validasi gagal mengembalikan response 422 dengan pesan kesalahan yang dapat dirender langsung oleh frontend Inertia.</p>
+  <p class="code-explain"><strong>Penjelasan:</strong> <em>constraint</em> <code class="inline">^2.0</code> berarti &ldquo;versi 2.x yang kompatibel ke atas&rdquo; — Composer otomatis mengambil patch &amp; minor terbaru tanpa <em>breaking change</em>. Setiap library di sini menggantikan kode yang seharusnya kita tulis ulang dari nol: <em>payment integration</em>, RBAC, autentikasi 2FA, dsb.</p>
+  <ul>
+    <li><strong>Spatie Laravel Permission</strong> — implementasi RBAC siap pakai (roles, permissions, middleware <code class="inline">permission:</code>).</li>
+    <li><strong>Laravel Fortify</strong> — backend autentikasi lengkap (login, register, 2FA, recovery codes) tanpa membuat ulang dari awal.</li>
+    <li><strong>Midtrans PHP SDK</strong> — pemrosesan pembayaran (Snap Token, webhook signature, dsb.).</li>
+    <li><strong>Inertia Laravel</strong> — penghubung Inertia.js, menjembatani controller Laravel ke komponen React.</li>
+  </ul>
+
+  <h4>4.6.2 Library Frontend (npm)</h4>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Library</th><th>Tujuan</th></tr></thead>
+    <tbody>
+      <tr><td>@inertiajs/react</td><td>Inertia SPA adapter untuk React.</td></tr>
+      <tr><td>@radix-ui/*</td><td>Primitif UI <em>accessible</em> (Dialog, Dropdown, Popover, Select, dsb.).</td></tr>
+      <tr><td>shadcn/ui pattern</td><td>Komponen siap kustomisasi berbasis Radix + Tailwind.</td></tr>
+      <tr><td>@tanstack/react-table</td><td>Headless table dengan sorting/filtering/pagination.</td></tr>
+      <tr><td>react-hook-form + zod</td><td>Form handling + skema validasi.</td></tr>
+      <tr><td>recharts</td><td>Chart library deklaratif untuk dashboard.</td></tr>
+      <tr><td>lucide-react</td><td>Icon set konsisten.</td></tr>
+      <tr><td>date-fns</td><td>Utilitas tanggal yang tree-shakeable.</td></tr>
+      <tr><td>@reduxjs/toolkit + react-redux + redux-persist</td><td>State management untuk cart yang persist.</td></tr>
+    </tbody>
+  </table>
   </div>
 
-  <h3>4.6 Database Transaction untuk Atomicity</h3>
-  <p>Operasi yang menyentuh beberapa tabel sekaligus (mis. simpan produk + simpan gambar) dibungkus dalam <code class="inline">DB::transaction()</code> agar konsisten dan <em>rollback</em> otomatis ketika terjadi error:</p>
+  <h4>4.6.3 Penggunaan Komponen UI di Halaman Dashboard</h4>
+<pre>// resources/js/pages/dashboard.tsx
+import { ChartAreaInteractive } from '@/components/chart-area-interactive';
+import { SectionCards } from '@/components/section-cards';
+import AppLayout from '@/layouts/app-layout';
+import { Head } from '@inertiajs/react';
+
+export default function Dashboard() {
+    return (
+        &lt;AppLayout breadcrumbs={breadcrumbs}&gt;
+            &lt;Head title="Dashboard" /&gt;
+            &lt;SectionCards /&gt;
+            &lt;ChartAreaInteractive /&gt;
+        &lt;/AppLayout&gt;
+    );
+}</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> halaman dashboard menyusun komponen-komponen yang sudah ada — <code class="inline">SectionCards</code> menampilkan KPI, <code class="inline">ChartAreaInteractive</code> menampilkan grafik berbasis <em>recharts</em>. <code class="inline">&lt;Head&gt;</code> dari Inertia mengatur judul tab browser secara deklaratif tanpa mengakses <code class="inline">document.title</code> manual. Ini contoh komposisi komponen <em>pre-existing</em>.</p>
+
+  <h4>4.6.4 Layanan Pihak Ketiga melalui HTTP Client Bawaan</h4>
+  <p>OpenStreetMap Nominatim diakses lewat Laravel HTTP client (<code class="inline">Illuminate\Support\Facades\Http</code>) — fasilitas <em>pre-existing</em> yang sudah menangani timeout, headers, dan parsing JSON.</p>
+<pre>$response = Http::withHeaders([
+    'User-Agent' =&gt; config('app.name', 'Laravel').' delivery geocoder',
+])-&gt;timeout(8)-&gt;get(config('delivery.geocode_url'), [
+    'q' =&gt; $query,
+    'format' =&gt; 'json',
+    'limit' =&gt; 1,
+    'countrycodes' =&gt; config('delivery.geocode_country'),
+]);</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> <code class="inline">Http::withHeaders()-&gt;timeout(8)-&gt;get()</code> adalah <em>fluent interface</em> bawaan Laravel. <code class="inline">User-Agent</code> diset sesuai kebijakan Nominatim (wajib mengidentifikasi aplikasi). <code class="inline">timeout(8)</code> memastikan request tidak menggantung lebih dari 8 detik. Parameter <code class="inline">countrycodes</code> membatasi hasil pencarian ke Indonesia agar lebih akurat.</p>
+
+  <div class="principle-card">
+    <h4>Filosofi</h4>
+    <p>Kurasi library yang aktif dipelihara, populer, dan punya tipe bawaan. Hindari menulis ulang RBAC, payment integration, atau komponen <em>accessible</em> dari nol — fokuslah pada nilai bisnis aplikasi.</p>
+  </div>
+</section>
+
+<!-- ===== UNIT 7 ===== -->
+<section class="page-break">
+  <h3>4.7 <span class="unit-tag">Unit 7</span>Menerapkan Akses Basis Data</h3>
+
+  <h4>4.7.1 Migrations sebagai Versi Schema</h4>
+  <p>Setiap perubahan struktur tabel diekspresikan sebagai berkas migration sehingga seluruh tim memiliki schema yang konsisten dan dapat dikembalikan (<em>rollback</em>):</p>
+<pre>database/migrations/
+├── 0001_01_01_000000_create_users_table.php
+├── 2025_10_02_114913_create_categories_table.php
+├── 2025_10_02_114918_create_products_table.php
+├── 2025_10_05_141521_images.php
+├── 2026_01_13_084012_create_permission_tables.php
+├── 2026_05_12_025849_create_transactions_table.php
+├── 2026_06_04_014251_create_shipments_table.php
+└── 2026_06_04_060000_add_shipping_village_to_transactions_table.php</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> nama file diawali timestamp (<code class="inline">YYYY_MM_DD_HHMMSS</code>) agar urutan eksekusi <em>migration</em> deterministik. Perubahan kecil (mis. menambah kolom <code class="inline">shipping_village</code>) dibuat sebagai migration terpisah, bukan mengubah migration lama — sehingga sejarah perubahan schema tetap utuh dan dapat di-<em>rollback</em>.</p>
+
+  <h4>4.7.2 Foreign Key &amp; Cascade</h4>
+<pre>Schema::create('products', function (Blueprint $table) {
+    $table-&gt;id();
+    $table-&gt;string('title');
+    $table-&gt;text('description');
+    $table-&gt;bigInteger('price');
+    $table-&gt;integer('stock')-&gt;default(0);
+    $table-&gt;unsignedBigInteger('category_id')-&gt;default(0);
+    $table-&gt;foreign('category_id')-&gt;references('id')-&gt;on('categories')-&gt;onDelete('cascade');
+    $table-&gt;timestamps();
+});</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> integritas referensial dijamin oleh <em>foreign key constraint</em>. Database akan menolak <code class="inline">category_id</code> yang tidak ada. Klausa <code class="inline">onDelete('cascade')</code> memastikan tidak ada produk <em>orphan</em> ketika kategorinya dihapus.</p>
+
+  <h4>4.7.3 Eloquent ORM — Anti SQL Injection</h4>
+  <p>Setiap query menggunakan Eloquent atau Query Builder dengan <em>parameter binding</em>, sehingga input pengguna tidak pernah di-<em>concatenate</em> ke string SQL.</p>
+<pre>// Filter produk dinamis pada ProductController::getFilteredProducts
+$query = Product::with('images');
+
+if ($request-&gt;filled('search')) {
+    $search = $request-&gt;input('search');
+    $query-&gt;where(function ($q) use ($search) {
+        $q-&gt;where('title', 'like', "%{$search}%")
+          -&gt;orWhereHas('category', function ($cq) use ($search) {
+              $cq-&gt;where('name', 'like', "%{$search}%");
+          });
+    });
+}
+
+if ($request-&gt;filled('category_id')) {
+    $query-&gt;where('category_id', $request-&gt;category_id);
+}
+
+if ($request-&gt;filled('min_price')) {
+    $query-&gt;where('price', '&gt;=', $request-&gt;min_price);
+}
+
+$paginator = $query-&gt;paginate($perPage, ['*'], 'page', $page);</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> filter dibangun secara <em>incremental</em> menggunakan <em>conditional clauses</em>. Setiap nilai yang berasal dari pengguna (<code class="inline">$search</code>, <code class="inline">category_id</code>, <code class="inline">min_price</code>) ditangani oleh Query Builder yang melakukan <em>parameter binding</em> otomatis — jadi <strong>aman dari SQL Injection</strong> meskipun secara sintaks terlihat seperti string interpolation. <code class="inline">orWhereHas</code> melakukan <em>subquery</em> pada relasi <code class="inline">category</code>, dan <code class="inline">paginate()</code> menghasilkan response dengan metadata <em>pagination</em>.</p>
+
+  <h4>4.7.4 Eager Loading — Mencegah N+1</h4>
+<pre>// Memuat relasi images bersamaan agar tidak terjadi N+1 query
+$product = Product::with('images')-&gt;findOrFail($id);
+
+// Multi-relasi
+$product = Product::with(['images', 'category'])-&gt;find($id);</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> tanpa <code class="inline">with()</code>, Laravel akan menjalankan query terpisah untuk setiap relasi tiap kali diakses — masalah klasik N+1. Dengan <em>eager loading</em>, semua data dimuat dalam <em>satu set query</em> efisien: 1 untuk produk, 1 untuk seluruh image, 1 untuk seluruh category. <code class="inline">findOrFail</code> memunculkan response 404 otomatis bila ID tidak ditemukan.</p>
+
+  <h4>4.7.5 Atomicity dengan Database Transaction</h4>
 <pre>DB::transaction(function () use ($request, $validated) {
     $product = Product::create([
         'title'        =&gt; $validated['title'],
@@ -501,155 +957,130 @@ public function store(Request $request): RedirectResponse
         }
     }
 });</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> seluruh operasi (membuat produk + menyimpan banyak gambar) dibungkus <code class="inline">DB::transaction()</code>. Jika satu langkah gagal — misal salah satu file gagal disimpan ke disk — semua perubahan database otomatis di-<em>rollback</em>. Tidak akan terjadi kondisi produk &ldquo;setengah jadi&rdquo; (ada di DB tapi tanpa gambar). Inilah <em>atomicity</em>: <em>all-or-nothing</em>.</p>
 
-  <h3>4.7 Role-Based Access Control (RBAC) via Middleware</h3>
-  <p>Dengan bantuan <code class="inline">spatie/laravel-permission</code>, setiap rute admin dijaga oleh middleware <code class="inline">permission:&lt;nama&gt;</code>. Pendekatan ini mengikuti <em>Principle of Least Privilege</em>: pengguna hanya melihat &amp; mengeksekusi aksi sesuai izinnya.</p>
-<pre>// routes/web.php
-Route::middleware(['auth', 'verified'])-&gt;group(function () {
-
-    Route::middleware(['permission:product.create'])-&gt;group(function () {
-        Route::get('product/create',  [ProductController::class, 'create'])-&gt;name('productCreate');
-        Route::post('product/store',  [ProductController::class, 'store'])-&gt;name('productStore');
-    });
-
-    Route::middleware(['permission:product.view'])-&gt;group(function () {
-        Route::get('product',         [ProductController::class, 'index'])-&gt;name('product');
-        Route::get('product/{id}',    [ProductController::class, 'show'])-&gt;name('productShow');
-    });
-
-    Route::middleware(['permission:product.edit'])-&gt;group(function () {
-        Route::post('product/update/{id}', [ProductController::class, 'update'])-&gt;name('productUpdate');
-    });
-
-    Route::middleware(['permission:product.delete'])-&gt;group(function () {
-        Route::delete('product/{id}', [ProductController::class, 'destroy'])-&gt;name('productDelete');
-    });
-});</pre>
-  <div class="principle-card">
-    <h4>Granularitas izin</h4>
-    <p>Izin dibagi atas pola <code class="inline">resource.action</code> (mis. <code class="inline">product.create</code>, <code class="inline">shipments.edit</code>) sehingga peran (<em>role</em>) bisa dirakit secara dinamis dari kombinasi <em>permission</em> tanpa mengubah kode.</p>
-  </div>
-
-  <h3>4.8 Service Layer untuk Bisnis Logic</h3>
-  <p>Untuk logika non-trivial yang berpotensi dipakai ulang, kami mengekstrak ke <em>Service class</em> sehingga controller tetap ringkas dan logika dapat di-<em>unit test</em>. Contoh: <code class="inline">App\Services\DeliveryService</code> bertanggung jawab atas <em>geocoding</em> dan kalkulasi ongkir.</p>
-<pre>// app/Services/DeliveryService.php
-class DeliveryService
-{
-    /**
-     * Build a shipping quote for a destination address.
-     * Geocodes the address, measures the distance from the store origin and
-     * applies a pure per-km rate. Falls back to a flat fee when the address
-     * cannot be located so checkout never breaks.
-     */
-    public function quote(string $address, ?string $city = null, /* ... */): array
-    {
-        $candidates = array_unique(array_filter([
-            implode(', ', array_filter([$address, $village, $district, $city, $province, $postalCode])),
-            implode(', ', array_filter([$village, $district, $city, $province])),
-            // ... candidates progressively coarser
-        ]));
-
-        $coords = null;
-        foreach ($candidates as $candidate) {
-            $coords = $this-&gt;geocode(trim($candidate));
-            if ($coords) break;
-        }
-
-        if (! $coords) {
-            return [
-                'distance_km'   =&gt; null,
-                'shipping_cost' =&gt; (int) config('delivery.fallback_fee'),
-                'geocoded'      =&gt; false,
-            ];
-        }
-
-        $distance   = $this-&gt;haversine(/* origin */, $coords['lat'], $coords['lng']);
-        $billableKm = max(1, (int) ceil($distance));
-        $cost       = $billableKm * (int) config('delivery.rate_per_km');
-
-        return [
-            'distance_km'   =&gt; round($distance, 1),
-            'shipping_cost' =&gt; $cost,
-            'geocoded'      =&gt; true,
-        ];
-    }
-}</pre>
-  <div class="principle-card">
-    <h4>Single Responsibility</h4>
-    <p>Controller bertanggung jawab atas HTTP, sedangkan kalkulasi ongkir &amp; geocoding tinggal di <code class="inline">DeliveryService</code>. Bila aturan ongkir berubah, hanya satu kelas yang perlu disentuh.</p>
-  </div>
-
-  <h3>4.9 Caching Strategy</h3>
-  <p>Layanan eksternal (Nominatim OpenStreetMap) memiliki rate limit dan latensi tinggi. Hasil geocoding sukses kami cache 30 hari, sedangkan kegagalan tidak di-cache supaya bisa <em>retry</em>:</p>
-<pre>$cacheKey = 'delivery:geocode:'.md5($query);
-
-if ($cached = Cache::get($cacheKey)) {
-    return $cached;
-}
-
-// ... call external service
-if (! empty($data[0]['lat']) &amp;&amp; ! empty($data[0]['lon'])) {
-    $coords = ['lat' =&gt; (float) $data[0]['lat'], 'lng' =&gt; (float) $data[0]['lon']];
-    Cache::put($cacheKey, $coords, now()-&gt;addDays(30));
-    return $coords;
-}</pre>
-
-  <h3>4.10 Type Safety dengan TypeScript</h3>
-  <p>Seluruh frontend ditulis dalam TypeScript dengan <code class="inline">tsc --noEmit</code> sebagai gate kualitas. Tipe untuk props halaman didefinisikan terpusat di <code class="inline">resources/js/types/</code> sehingga konsisten antar halaman. Wayfinder bahkan menghasilkan helper rute bertipe sehingga kesalahan nama rute terdeteksi sebelum runtime.</p>
-<pre>// resources/js/pages/dashboard.tsx
-import { dashboard } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
-
-const breadcrumbs: BreadcrumbItem[] = [
-  { title: 'Dashboard', href: dashboard().url },
+  <h4>4.7.6 Casting Tipe Kolom JSON / Date</h4>
+<pre>// app/Models/Transaction.php
+protected $casts = [
+    'items' =&gt; 'array',
+    'paid_at' =&gt; 'datetime',
 ];</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> kolom <code class="inline">items</code> disimpan di database sebagai string JSON, namun ketika diakses di PHP otomatis menjadi <em>array</em> berkat <em>cast</em>. <code class="inline">paid_at</code> menjadi instance <code class="inline">Carbon</code> sehingga developer dapat memanggil <code class="inline">$tx-&gt;paid_at-&gt;diffForHumans()</code> tanpa konversi manual. Ini menghilangkan <em>boilerplate</em> di tiap pemanggilan.</p>
+</section>
 
-  <h3>4.11 Component-Based UI &amp; Reusability</h3>
-  <p>Frontend dibagi atas komponen kecil yang masing-masing punya satu tanggung jawab. Layout (<code class="inline">app-layout.tsx</code>, <code class="inline">auth-layout.tsx</code>) memisahkan kerangka halaman dari konten, sedangkan komponen UI dasar (<code class="inline">button</code>, <code class="inline">dialog</code>, <code class="inline">table</code>) mengikuti pola shadcn/ui yang dapat dikustomisasi.</p>
-<pre>resources/js/components/
-├── ui/                      ← Primitives (button, input, dialog, ...)
-├── chart-area-interactive   ← Komponen visualisasi
-├── section-cards            ← Komponen KPI dashboard
-├── app-header, app-sidebar  ← Layout chrome
-└── nav-main, nav-footer     ← Navigasi
-</pre>
+<!-- ===== UNIT 8 ===== -->
+<section class="page-break">
+  <h3>4.8 <span class="unit-tag">Unit 8</span>Melaksanakan Pengujian Unit Program</h3>
 
-  <h3>4.12 Defensive Programming &amp; Fallback</h3>
-  <p>Antarmuka yang menyentuh sistem eksternal selalu memiliki <em>fallback</em> agar pengalaman pengguna tidak terganggu jika layanan pihak ketiga gagal. Contoh pada <code class="inline">DeliveryService::quote()</code>: bila <em>geocoding</em> gagal, sistem mengembalikan <code class="inline">fallback_fee</code> dari konfigurasi, bukan melempar exception ke halaman checkout. Demikian pula pada controller produk, pemetaan gambar memiliki <em>default</em> jika koleksi kosong:</p>
-<pre>$images = $product-&gt;images-&gt;map(/* ... */)-&gt;toArray();
+  <h4>4.8.1 Konfigurasi PHPUnit / Pest</h4>
+  <p>Konfigurasi <code class="inline">phpunit.xml</code> mendefinisikan dua suite: <em>Unit</em> (logika murni) dan <em>Feature</em> (HTTP request → response). Database test menggunakan SQLite <em>in-memory</em> agar cepat dan reproducible.</p>
+<pre>&lt;phpunit ...&gt;
+    &lt;testsuites&gt;
+        &lt;testsuite name="Unit"&gt;
+            &lt;directory&gt;tests/Unit&lt;/directory&gt;
+        &lt;/testsuite&gt;
+        &lt;testsuite name="Feature"&gt;
+            &lt;directory&gt;tests/Feature&lt;/directory&gt;
+        &lt;/testsuite&gt;
+    &lt;/testsuites&gt;
+    &lt;php&gt;
+        &lt;env name="APP_ENV" value="testing"/&gt;
+        &lt;env name="DB_CONNECTION" value="sqlite"/&gt;
+        &lt;env name="DB_DATABASE" value=":memory:"/&gt;
+        &lt;env name="CACHE_STORE" value="array"/&gt;
+        &lt;env name="MAIL_MAILER" value="array"/&gt;
+        &lt;env name="QUEUE_CONNECTION" value="sync"/&gt;
+    &lt;/php&gt;
+&lt;/phpunit&gt;</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> <code class="inline">DB_DATABASE=":memory:"</code> menjalankan database SQLite di RAM — sangat cepat dan otomatis hilang setelah test selesai, sehingga test tidak meninggalkan sampah. <code class="inline">CACHE_STORE=array</code> dan <code class="inline">QUEUE_CONNECTION=sync</code> membuat cache dan queue jalan in-memory tanpa <em>side effect</em>. Email juga di-<em>capture</em> di array, bukan dikirim sungguhan.</p>
 
-if (empty($images)) {
-    $images = [
-        '/assets/ProductDetail/productdetail-1.jpg',
-        // fallback agar tampilan tetap valid
-    ];
-}</pre>
-  <div class="note">
-    <strong>Catatan:</strong> <em>Defensive programming</em> dipakai khusus pada batas sistem (input pengguna, response service eksternal). Pada kode internal, kami percaya pada kontrak fungsi agar tidak menambah pemeriksaan yang tidak perlu (sesuai prinsip <em>YAGNI</em>).
+  <h4>4.8.2 Bootstrap Pest dengan RefreshDatabase</h4>
+<pre>// tests/Pest.php
+pest()-&gt;extend(Tests\TestCase::class)
+    -&gt;use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    -&gt;in('Feature');
+
+expect()-&gt;extend('toBeOne', function () {
+    return $this-&gt;toBe(1);
+});</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> trait <code class="inline">RefreshDatabase</code> menjalankan <code class="inline">migrate:fresh</code> sebelum setiap test sehingga state database selalu bersih dan deterministik. <code class="inline">expect()-&gt;extend('toBeOne', ...)</code> menambahkan <em>custom matcher</em> agar test dapat ditulis dengan lebih ekspresif: <code class="inline">expect($count)-&gt;toBeOne()</code>.</p>
+
+  <h4>4.8.3 Smoke Test Halaman Utama</h4>
+<pre>// tests/Feature/ExampleTest.php
+it('returns a successful response', function () {
+    $response = $this-&gt;get('/');
+
+    $response-&gt;assertStatus(200);
+});</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> test paling dasar — &ldquo;halaman home masih nyala&rdquo;. Pest menggunakan <em>function-style</em> <code class="inline">it('...')</code> yang dibaca seperti kalimat. Bila dependency penting (misalnya provider) rusak, test ini gagal duluan sebelum test lain berjalan.</p>
+
+  <h4>4.8.4 Feature Test — Otorisasi Dashboard</h4>
+  <p>Memastikan pengguna <em>guest</em> dialihkan ke halaman login dan pengguna terautentikasi dapat mengakses dashboard:</p>
+<pre>// tests/Feature/DashboardTest.php
+use App\Models\User;
+
+test('guests are redirected to the login page', function () {
+    $this-&gt;get(route('dashboard'))-&gt;assertRedirect(route('login'));
+});
+
+test('authenticated users can visit the dashboard', function () {
+    $this-&gt;actingAs($user = User::factory()-&gt;create());
+
+    $this-&gt;get(route('dashboard'))-&gt;assertOk();
+});</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> test pertama memverifikasi <em>middleware</em> <code class="inline">auth</code> bekerja — pengguna tak login dialihkan ke <code class="inline">/login</code>. Test kedua memakai <code class="inline">User::factory()</code> untuk membuat pengguna palsu, lalu <code class="inline">actingAs()</code> men-simulasi login. Setelah login, akses ke <code class="inline">/dashboard</code> harus mengembalikan 200 (OK). Dua test ini melindungi alur autentikasi dari regresi.</p>
+
+  <h4>4.8.5 Feature Test — Modul Autentikasi &amp; Pengaturan</h4>
+  <p>Folder <code class="inline">tests/Feature/Auth/</code> dan <code class="inline">tests/Feature/Settings/</code> berisi test untuk:</p>
+  <ul>
+    <li>Login, registrasi, password reset, dan verifikasi email.</li>
+    <li>Pengaturan profil, kata sandi, dan 2FA.</li>
+  </ul>
+
+  <h4>4.8.6 Menjalankan Test</h4>
+<pre># Menjalankan seluruh suite
+php artisan test
+
+# Suite tertentu
+php artisan test --testsuite=Feature
+php artisan test --testsuite=Unit
+
+# File spesifik
+php artisan test tests/Feature/DashboardTest.php
+
+# Mode paralel
+php artisan test --parallel</pre>
+  <p class="code-explain"><strong>Penjelasan:</strong> perintah <code class="inline">php artisan test</code> adalah <em>wrapper</em> Laravel di atas Pest/PHPUnit dengan output yang lebih ramah dan ikon yang mudah dibaca. Flag <code class="inline">--parallel</code> menjalankan test secara paralel di beberapa proses CPU, sangat berguna ketika jumlah test sudah besar.</p>
+
+  <div class="principle-card">
+    <h4>Manfaat</h4>
+    <p>Pengujian otomatis menjadi <em>safety net</em> ketika kode di-<em>refactor</em>. Setiap perubahan dapat diverifikasi dalam hitungan detik, bukan menit; regresi pada alur kritis (autentikasi, dashboard, dsb.) tertangkap sebelum sampai ke pengguna.</p>
   </div>
 </section>
 
 <!-- ========== BAB V ========== -->
 <section class="page-break">
   <h2>BAB V &mdash; KESIMPULAN</h2>
-  <p>Berdasarkan penerapan yang telah didokumentasikan pada bab-bab sebelumnya, dapat disimpulkan bahwa proyek <strong>Order Store</strong> mengadopsi prinsip penulisan kode yang sejalan dengan <em>guidelines</em> dan <em>best practice</em> industri:</p>
+  <p>Berdasarkan implementasi yang telah didokumentasikan pada BAB IV, proyek <strong>Order Store</strong> telah menerapkan delapan unit kompetensi pemrograman secara terpadu:</p>
   <ol>
-    <li><strong>Struktur &amp; konvensi</strong>: project mengikuti struktur direktori standar Laravel dan PSR-4 autoloading, membuat <em>codebase</em> mudah ditelusuri dan di-<em>onboarding</em>.</li>
-    <li><strong>Pemisahan tanggung jawab</strong>: arsitektur MVC dipertegas dengan <em>Service Layer</em> untuk logika kompleks (mis. <code class="inline">DeliveryService</code>), sehingga controller tetap fokus pada urusan HTTP.</li>
-    <li><strong>Validasi &amp; keamanan</strong>: validasi diletakkan pada batas sistem (controller), parameter binding Eloquent meniadakan risiko SQL Injection, dan RBAC via middleware <code class="inline">spatie/laravel-permission</code> menerapkan <em>Principle of Least Privilege</em>.</li>
-    <li><strong>Konsistensi data</strong>: operasi multi-tabel dilindungi <code class="inline">DB::transaction()</code> sehingga atomicity terjaga.</li>
-    <li><strong>Performa &amp; ketahanan</strong>: caching hasil geocoding dan <em>fallback fee</em> menjaga checkout tetap berfungsi meskipun layanan eksternal bermasalah.</li>
-    <li><strong>Kualitas kode otomatis</strong>: Pint, Prettier, ESLint, dan TypeScript <code class="inline">--noEmit</code> menjamin gaya penulisan seragam tanpa beban manual.</li>
-    <li><strong>Type-safety &amp; reusability</strong>: TypeScript di frontend, komponen React modular, serta helper rute bertipe (Wayfinder) menurunkan jumlah <em>bug</em> regresi.</li>
+    <li><strong>Unit 1 — Best Practice</strong>: struktur folder Laravel, PSR-4, SOLID, dan tooling otomatis (Pint, Prettier, ESLint, TypeScript).</li>
+    <li><strong>Unit 2 — Debugging</strong>: <code class="inline">Log</code> facade, <em>defensive fallback</em>, <code class="inline">try/catch</code> pada operasi I/O, dan Laravel Pail untuk <em>real-time tailing</em>.</li>
+    <li><strong>Unit 3 — Dokumen Kode</strong>: PHPDoc dengan tipe array terstruktur, komentar konfigurasi yang menjelaskan <em>mengapa</em>, dan penanda bagian rute pada <code class="inline">routes/web.php</code>.</li>
+    <li><strong>Unit 4 — Spesifikasi Program</strong>: type hints PHP 8, TypeScript, validasi <code class="inline">$request-&gt;validate()</code>, dan migrations sebagai spesifikasi schema.</li>
+    <li><strong>Unit 5 — OOP</strong>: <em>inheritance</em> (Model, Controller), polimorfisme via <code class="inline">morphMany</code>, enkapsulasi via <em>private/protected</em>, dan abstraksi melalui Service Layer.</li>
+    <li><strong>Unit 6 — Library Pre-Existing</strong>: Spatie Permission, Fortify, Midtrans SDK, Inertia, Radix UI, shadcn/ui, TanStack Table, Recharts, dsb.</li>
+    <li><strong>Unit 7 — Akses Basis Data</strong>: Migrations, foreign key cascade, Eloquent dengan parameter binding, <em>eager loading</em>, transaksi atomik, dan <em>casting</em>.</li>
+    <li><strong>Unit 8 — Pengujian Unit Program</strong>: Pest PHP dengan SQLite <em>in-memory</em>, dua suite (Unit + Feature), serta test untuk autentikasi, dashboard, dan pengaturan.</li>
   </ol>
-  <p>Penerapan prinsip-prinsip tersebut tidak hanya mempercantik kode, melainkan juga memberi dampak terukur: <em>onboarding</em> pengembang baru menjadi cepat, <em>code review</em> berfokus pada substansi (bukan format), <em>regression</em> berkurang, dan sistem siap dikembangkan ke arah <em>scalability</em> berikutnya seperti fitur audit log, notifikasi otomatis, ataupun aplikasi mobile.</p>
+  <p>Penerapan kedelapan unit ini tidak berdiri sendiri; mereka saling mendukung. Misalnya, <em>type hints</em> (Unit 4) memperkuat <em>debugging</em> (Unit 2) karena banyak kelas bug ditolak <em>compile-time</em>; OOP yang baik (Unit 5) membuat <em>unit test</em> (Unit 8) menjadi mudah ditulis; dan dokumentasi (Unit 3) memudahkan penerapan <em>best practice</em> (Unit 1) oleh anggota tim baru.</p>
 
   <h3>Rekomendasi Pengembangan Lanjutan</h3>
   <ul>
-    <li>Memindahkan validasi besar dari controller ke <em>Form Request</em> kelas tersendiri untuk meningkatkan keterujian dan keterbacaan.</li>
-    <li>Menambahkan <em>Policy</em> Laravel untuk otorisasi berbasis instance (mis. apakah <em>courier</em> X boleh mengubah <em>shipment</em> Y).</li>
-    <li>Menambah cakupan <em>feature test</em> Pest untuk alur <em>checkout</em>, <em>webhook</em> Midtrans, dan <em>shipping quote</em>.</li>
-    <li>Menerapkan <em>commit hook</em> (mis. via Husky atau lefthook) agar Pint, Prettier, ESLint, dan TypeScript dijalankan otomatis sebelum commit.</li>
+    <li>Memindahkan validasi besar dari controller ke <em>Form Request</em> kelas tersendiri untuk meningkatkan keterujian.</li>
+    <li>Menambahkan <em>Policy</em> Laravel untuk otorisasi berbasis instance (mis. <em>courier</em> X hanya boleh mengubah <em>shipment</em>-nya sendiri).</li>
+    <li>Menulis <em>unit test</em> langsung untuk <code class="inline">DeliveryService</code> dengan <em>HTTP fake</em> agar logika ongkir terjamin tanpa memanggil API Nominatim.</li>
+    <li>Menambah cakupan <em>feature test</em> alur <em>checkout</em>, <em>webhook</em> Midtrans, dan <em>shipping quote</em>.</li>
+    <li>Menerapkan <em>commit hook</em> (Husky/lefthook) agar Pint, Prettier, ESLint, TypeScript, dan Pest dijalankan otomatis pra-commit.</li>
     <li>Menambah dokumentasi <em>API contract</em> (OpenAPI) untuk endpoint publik (<code class="inline">get-all-products</code>, <code class="inline">get-filtered-products</code>, dsb.).</li>
   </ul>
 </section>
@@ -662,9 +1093,12 @@ if (empty($images)) {
     <li>Hunt, A., &amp; Thomas, D. (1999). <em>The Pragmatic Programmer: From Journeyman to Master</em>. Addison-Wesley.</li>
     <li>Martin, R. C. (2008). <em>Clean Code: A Handbook of Agile Software Craftsmanship</em>. Prentice Hall.</li>
     <li>Martin, R. C. (2017). <em>Clean Architecture: A Craftsman&rsquo;s Guide to Software Structure and Design</em>. Prentice Hall.</li>
+    <li>McConnell, S. (2004). <em>Code Complete: A Practical Handbook of Software Construction</em> (2nd ed.). Microsoft Press.</li>
     <li>OWASP Foundation. (2021). <em>OWASP Top 10 &mdash; The Ten Most Critical Web Application Security Risks</em>. https://owasp.org/Top10/</li>
     <li>PHP-FIG. (2019). <em>PSR-12: Extended Coding Style</em>. https://www.php-fig.org/psr/psr-12/</li>
+    <li>PHP-FIG. (2019). <em>PSR-5: PHPDoc Standard</em>. https://www.php-fig.org/</li>
     <li>Laravel Documentation. (2026). <em>The PHP Framework for Web Artisans</em>. https://laravel.com/docs</li>
+    <li>Pest PHP Documentation. (2026). <em>An Elegant PHP Testing Framework</em>. https://pestphp.com</li>
     <li>Inertia.js Documentation. (2026). <em>The Modern Monolith</em>. https://inertiajs.com</li>
     <li>Spatie. (2026). <em>Laravel Permission Documentation</em>. https://spatie.be/docs/laravel-permission</li>
     <li>Sahyudi, M., &amp; Susanto, E. R. (2025). <em>Analisis Implementasi Sistem Keamanan Basis Data Berbasis Role-Based Access Control (RBAC) pada Aplikasi Enterprise Resource Planning</em>, 5(1), 105–116.</li>
