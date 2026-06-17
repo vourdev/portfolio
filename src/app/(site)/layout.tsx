@@ -4,6 +4,7 @@ import { LenisProvider } from "@/components/lenis-provider";
 import { PortfolioSidebar } from "@/components/portfolio-sidebar";
 import { TopBar } from "@/components/top-bar";
 import { getProfile, getSocials } from "@/lib/content";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export async function generateMetadata(): Promise<Metadata> {
   const profile = await getProfile();
@@ -34,6 +35,7 @@ export default async function SiteLayout({
 
   return (
     <LenisProvider>
+      <SpeedInsights />
       {/* Fixed crosshair frame — only on tablet and up; hidden on mobile. */}
       <div
         aria-hidden
