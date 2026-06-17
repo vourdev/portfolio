@@ -12,6 +12,7 @@ import {
 } from "@tabler/icons-react";
 import type { SiteProfile, SocialView } from "@/lib/content";
 import { SearchSections } from "@/components/search-sections";
+import { toggleTheme } from "@/lib/theme-transition";
 import { cn } from "@/lib/utils";
 
 function Clock() {
@@ -43,7 +44,9 @@ function ThemeToggle() {
     <button
       type="button"
       aria-label="Toggle theme"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={(e) =>
+        toggleTheme(resolvedTheme, setTheme, { x: e.clientX, y: e.clientY })
+      }
       className="flex h-9 w-9 items-center justify-center rounded-lg text-neutral-600 transition-colors hover:bg-black/5 dark:text-neutral-300 dark:hover:bg-white/10"
     >
       {mounted && !isDark ? <IconMoon size={18} /> : <IconSun size={18} />}
